@@ -1,0 +1,63 @@
+<h1>Show Pet</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @pet.name %>
+  </li>
+
+  <li>
+    <strong>Reward:</strong>
+    <%= @pet.reward %>
+  </li>
+
+  <li>
+    <strong>Birthdate:</strong>
+    <%= @pet.birthdate %>
+  </li>
+
+  <li>
+    <strong>Species:</strong>
+    <%= @pet.species %>
+  </li>
+
+  <li>
+    <strong>Breed:</strong>
+    <%= @pet.breed %>
+  </li>
+
+  <li>
+    <strong>Color:</strong>
+    <%= @pet.color %>
+  </li>
+
+  <li>
+    <strong>Reproductive status:</strong>
+    <%= @pet.reproductive_status %>
+  </li>
+
+  <li>
+    <strong>Weight:</strong>
+    <%= @pet.weight %>
+  </li>
+
+  <li>
+    <strong>Food type:</strong>
+    <%= @pet.food_type %>
+  </li>
+
+  <li>
+    <strong>Consumption frequency:</strong>
+    <%= @pet.consumption_frequency %>
+  </li>
+
+  <li>
+    <strong>Food brand:</strong>
+    <%= @pet.food_brand %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.pet_path(@conn, :edit, @pet) %></span> |
+<span><%= link "Back", to: Routes.pet_path(@conn, :index) %></span>

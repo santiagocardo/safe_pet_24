@@ -1,0 +1,35 @@
+<.form let={f} for={@vaccine_changeset} action={@action}>
+  <%= if @vaccine_changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Ups, algo estuvo mal! Por favor revisa los errores abajo.</p>
+    </div>
+  <% end %>
+
+  <div class="flex-auto px-4 lg:px-10 pb-10">
+    <h6 class="text-gray-400 text-xs px-4 my-3 font-bold uppercase">
+      Registrar Vacuna
+    </h6>
+    <div class="flex flex-wrap items-center">
+      <div class="w-full lg:w-4/12 px-4">
+        <div class="relative w-full mb-3">
+          <%= text_input f, :name, placeholder: "Vacuna", class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= error_tag f, :name %>
+        </div>
+      </div>
+      <div class="w-full lg:w-4/12 px-4">
+        <div class="relative w-full mb-3">
+          <%= date_input f, :date, placeholder: "Fecha", class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= error_tag f, :date %>
+        </div>
+      </div>
+      <div class="w-full lg:w-4/12 px-4">
+        <div class="relative w-full mb-3">
+          <%= submit "Registrar",
+            phx_disable_with: "Registrando...",
+            class: "my-2 sm:my-0 text-center w-full sm:w-auto bg-blue-500 text-white hover:bg-blue-600 font-bold uppercase text-xs px-4 py-3 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+          %>
+        </div>
+      </div>
+    </div>
+  </div>
+</.form>

@@ -1,0 +1,57 @@
+<.form let={f} for={@changeset} action={@action}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Ups, algo estuvo mal! Por favor revisa los errores abajo.</p>
+    </div>
+  <% end %>
+
+  <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+    <h6 class="text-gray-400 text-sm mt-3 mb-6 font-bold uppercase">
+      Enfermedades
+    </h6>
+
+    <hr class="border-b-1 border-gray-300" />
+
+    <div class="block w-full overflow-x-auto">
+      <!-- table -->
+      <table class="items-center w-full bg-transparent border-collapse">
+        <thead>
+          <tr>
+            <th class="px-6 py-3 align-middle text-xs uppercase whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+              Nombre
+            </th>
+            <th class="px-6 py-3 align-middle text-xs uppercase whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+              Cuidados de la enfermedad
+            </th>
+          </tr>
+        </thead>
+        <tbody id="diseases">
+          <%= for disease <- inputs_for(f, :diseases) do %>
+            <tr>
+              <td class="sm:px-6 py-2 align-middle text-sm whitespace-nowrap">
+                <%= text_input disease, :name, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+                <%= error_tag disease, :name %>
+              </td>
+              <td class="px-6 py-2 align-middle text-sm whitespace-nowrap">
+                <%= text_input disease, :care, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+                <%= error_tag disease, :care %>
+              </td>
+              <td class="py-2 align-middle text-sm whitespace-nowrap">
+                <%= link "Eliminar",
+                  to: Routes.pet_path(@conn, :delete_disease, %{"id" => disease.data.id}), method: :delete, data: [confirm: "Estás seguro/a?"],
+                  class: "py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
+                %>
+              </td>
+              <td class="py-2 align-middle text-sm whitespace-nowrap">
+                <%= submit "Actualizar",
+                  phx_disable_with: "Actualizando...",
+                  class: "my-2 sm:my-0 text-center w-full sm:w-auto bg-blue-500 text-white hover:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+                %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</.form>

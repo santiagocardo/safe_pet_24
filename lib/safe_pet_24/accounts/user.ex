@@ -4,9 +4,12 @@ defmodule SafePet24.Accounts.User do
 
   schema "users" do
     field :email, :string
+    field :serial, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
+
+    has_many :pets, SafePet24.Pets.Pet
 
     timestamps()
   end
@@ -30,7 +33,8 @@ defmodule SafePet24.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password, :serial])
+    |> validate_serial()
     |> validate_email()
     |> validate_password(opts)
   end
@@ -52,6 +56,14 @@ defmodule SafePet24.Accounts.User do
     # |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
     # |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")
     |> maybe_hash_password(opts)
+  end
+
+  defp validate_serial(changeset) do
+    changeset
+    |> validate_required([:serial])
+    |> validate_length(:serial, min: 6, max: 24)
+    |> unsafe_validate_unique(:serial, SafePet24.Repo)
+    |> unique_constraint(:serial)
   end
 
   defp maybe_hash_password(changeset, opts) do

@@ -1,0 +1,74 @@
+<div class="rounded-t bg-white p-6">
+  <div class="flex flex-wrap justify-between items-center">
+    <h6 class="w-full sm:w-auto text-center text-gray-700 text-xl font-bold">
+      Tus Mascotas
+    </h6>
+    <%= link "Restristrar",
+      to: Routes.pet_path(@conn, :new),
+      class: "my-2 sm:my-0 text-center w-full sm:w-auto bg-blue-500 text-white hover:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+    %>
+  </div>
+</div>
+
+<div class="block w-full overflow-x-auto">
+  <!-- table -->
+  <table class="items-center w-full bg-transparent border-collapse">
+    <thead>
+      <tr>
+        <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+          Nombre
+        </th>
+        <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+          Especie
+        </th>
+        <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+          Raza
+        </th>
+      </tr>
+    </thead>
+    <tbody id="pets">
+      <%= for pet <- @pets do %>
+        <tr id={"pet-#{pet.id}"} class="capitalize border-t-2">
+          <th class="px-6 py-2 align-middle border-t-0 border-l-0 border-r-0 text-sm whitespace-nowrap text-left">
+            <%= link to: Routes.pet_path(@conn, :show, pet) do %>
+              <span class="font-bold text-gray-600"><%= pet.name %></span>
+            <% end %>
+          </th>
+          <td class="px-6 py-2 align-middle border-t-0 border-l-0 border-r-0 text-sm whitespace-nowrap">
+            <%= pet.species %>
+          </td>
+          <td class="px-6 py-2 align-middle border-t-0 border-l-0 border-r-0 text-sm whitespace-nowrap">
+            <%= pet.breed %>
+          </td>
+          <td class="px-6 py-2 align-middle border-t-0 border-l-0 border-r-0 text-sm whitespace-nowrap text-right">
+            <a
+              href="#menu"
+              class="text-gray-500 block py-1 px-3"
+              onclick={"openDropdown(event,'table-light-1-dropdown-#{pet.id}')"}
+            >
+              <i class="fas fa-ellipsis-v"></i>
+            </a>
+            <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48" id={"table-light-1-dropdown-#{pet.id}"}>
+              <%= link "Ver",
+                to: Routes.pet_path(@conn, :show, pet),
+                class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+              %>
+              <%= link "Editar",
+                to: Routes.pet_path(@conn, :edit, pet),
+                class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+              %>
+              <%= link "Perfil Clínico",
+                to: Routes.pet_path(@conn, :clinical_profile, %{"id" => pet.id}),
+                class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+              %>
+              <%= link "Eliminar",
+                to: Routes.pet_path(@conn, :delete, pet), method: :delete, data: [confirm: "Estás seguro/a?"],
+                class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+              %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

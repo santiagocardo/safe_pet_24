@@ -1,0 +1,19 @@
+<div class="rounded-t bg-white p-6">
+  <div class="flex justify-between">
+    <h6 class="text-center text-gray-700 text-xl font-bold">
+      Perfil Clínico de <%= @pet.name %>
+    </h6>
+  </div>
+</div>
+
+<%= render "diseases_form.html", Map.put(assigns, :action, Routes.pet_path(@conn, :update_clinical_profile, %{"id" => @pet.id})) %>
+<%= render "disease.html", Map.put(assigns, :action, Routes.pet_path(@conn, :create_disease)) %>
+<%= render "vaccines_form.html", Map.put(assigns, :action, Routes.pet_path(@conn, :update_clinical_profile, %{"id" => @pet.id})) %>
+<%= render "vaccine.html", Map.put(assigns, :action, Routes.pet_path(@conn, :create_vaccine)) %>
+
+<div class="px-4 lg:px-10 pt-0 pb-10">
+  <%= link "◀︎ Volver",
+    to: Routes.pet_path(@conn, :index),
+    class: "bg-blue-500 text-white hover:bg-blue-600 font-bold uppercase text-xs m-4 px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+  %>
+</div>

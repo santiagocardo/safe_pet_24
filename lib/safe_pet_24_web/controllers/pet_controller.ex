@@ -38,7 +38,9 @@ defmodule SafePet24Web.PetController do
     pet = Pets.get_pet!(id)
     changeset = Pets.change_pet(pet)
 
-    render(conn, "show.html", pet: pet, changeset: changeset)
+    conn
+    |> assign(:page_title, "Ver Mascota")
+    |> render("show.html", pet: pet, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id}) do

@@ -1,63 +1,192 @@
-<h1>Show Pet</h1>
+<div class="rounded-t bg-white p-6">
+  <div class="flex justify-center">
+    <h6 class="text-center text-gray-600 text-xl">
+      Datos de <span class="text-gray-700 font-bold"><%= @pet.name %></span>
+    </h6>
+  </div>
+</div>
 
-<ul>
+<div class="flex-auto px-4 lg:px-10 pb-10">
+  <h6 class="text-gray-400 text-sm mt-3 mb-6 font-bold uppercase">
+    Información de tu Mascota
+  </h6>
+  <div class="flex flex-wrap">
+    <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+      <span class="uppercase text-gray-600 text-xs font-bold mb-2">Especie:</span>
+      <p class="inline-block text-sm">
+        <%= if @pet.species == "canino" do "Canino" else "Felino" end %>
+      </p>
+    </div>
+    <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+      <span class="uppercase text-gray-600 text-xs font-bold mb-2">Raza:</span>
+      <p class="inline-block text-sm"><%= @pet.breed %></p>
+    </div>
+    <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+      <span class="uppercase text-gray-600 text-xs font-bold mb-2">Fecha de Nacimiento:</span>
+      <p class="inline-block text-sm"><%= @pet.birthdate %></p>
+    </div>
+    <%= if @pet.color do %>
+      <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+        <span class="uppercase text-gray-600 text-xs font-bold mb-2">Color:</span>
+        <p class="inline-block text-sm"><%= @pet.color %></p>
+      </div>
+    <% end %>
+    <%= if @pet.weight do %>
+      <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+        <span class="uppercase text-gray-600 text-xs font-bold mb-2">Peso:</span>
+        <p class="inline-block text-sm"><%= @pet.weight %></p>
+      </div>
+    <% end %>
+    <%= if @pet.reproductive_status do %>
+      <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+        <span class="uppercase text-gray-600 text-xs font-bold mb-2">Estado Reproductivo:</span>
+        <p class="inline-block text-sm"><%= @pet.reproductive_status %></p>
+      </div>
+    <% end %>
+    <%= if @pet.food_type do %>
+      <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+        <span class="uppercase text-gray-600 text-xs font-bold mb-2">Tipo de Alimento:</span>
+        <p class="inline-block text-sm"><%= @pet.food_type %></p>
+      </div>
+    <% end %>
+    <%= if @pet.food_brand do %>
+      <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+        <span class="uppercase text-gray-600 text-xs font-bold mb-2">Marca de Alimento:</span>
+        <p class="inline-block text-sm"><%= @pet.food_brand %></p>
+      </div>
+    <% end %>
+    <%= if @pet.consumption_frequency do %>
+      <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+        <span class="uppercase text-gray-600 text-xs font-bold mb-2">Frecuencia de Consumo:</span>
+        <p class="inline-block text-sm"><%= @pet.consumption_frequency %></p>
+      </div>
+    <% end %>
+    <%= if @pet.reward do %>
+      <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+        <span class="uppercase text-gray-600 text-xs font-bold mb-2">Recompensa:</span>
+        <p class="inline-block text-sm"><%= @pet.reward %></p>
+      </div>
+    <% end %>
+  </div>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @pet.name %>
-  </li>
+  <%= if Enum.any?(@pet.diseases) or Enum.any?(@pet.vaccines) or Enum.any?(@pet.medications) do %>
+    <hr class="mt-6 border-b-1 border-gray-300" />
 
-  <li>
-    <strong>Reward:</strong>
-    <%= @pet.reward %>
-  </li>
+    <%= if Enum.any?(@pet.diseases) do %>
 
-  <li>
-    <strong>Birthdate:</strong>
-    <%= @pet.birthdate %>
-  </li>
+      <h6 class="text-gray-400 text-sm mt-10 mb-6 font-bold uppercase">
+        Enfermedades
+      </h6>
 
-  <li>
-    <strong>Species:</strong>
-    <%= @pet.species %>
-  </li>
+      <div class="block w-full overflow-x-auto">
+        <!-- table -->
+        <table class="items-center w-full bg-transparent border-collapse">
+          <thead>
+            <tr>
+              <th class="px-6 align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+                Nombre
+              </th>
+              <th class="px-6 align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+                Cuidados
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= for disease <- @pet.diseases do %>
+              <tr class="capitalize">
+                <th class="px-6 py-2 align-middle border border-solid border-l-0 border-r-1 text-sm whitespace-nowrap text-left">
+                  <span class="font-bold text-gray-600"><%= disease.name %></span>
+                </th>
+                <td class="px-6 py-2 align-middle border border-solid border-l-0 border-r-0 text-sm whitespace-nowrap">
+                  <%= disease.care %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
 
-  <li>
-    <strong>Breed:</strong>
-    <%= @pet.breed %>
-  </li>
+    <%= if Enum.any?(@pet.vaccines) do %>
+      <h6 class="text-gray-400 text-sm mt-10 mb-6 font-bold uppercase">
+        Vacunas
+      </h6>
 
-  <li>
-    <strong>Color:</strong>
-    <%= @pet.color %>
-  </li>
+      <div class="block w-full overflow-x-auto">
+        <!-- table -->
+        <table class="items-center w-full bg-transparent border-collapse">
+          <thead>
+            <tr>
+              <th class="px-6 align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+                Nombre
+              </th>
+              <th class="px-6 align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+                Fecha
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= for vaccine <- @pet.vaccines do %>
+              <tr class="capitalize">
+                <th class="px-6 py-2 align-middle border border-solid border-l-0 border-r-1 text-sm whitespace-nowrap text-left">
+                  <span class="font-bold text-gray-600"><%= vaccine.name %></span>
+                </th>
+                <td class="px-6 py-2 align-middle border border-solid border-l-0 border-r-0 text-sm whitespace-nowrap">
+                  <%= vaccine.date %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
 
-  <li>
-    <strong>Reproductive status:</strong>
-    <%= @pet.reproductive_status %>
-  </li>
+    <%= if Enum.any?(@pet.medications) do %>
+      <h6 class="text-gray-400 text-sm mt-10 mb-6 font-bold uppercase">
+        Medicamentos
+      </h6>
 
-  <li>
-    <strong>Weight:</strong>
-    <%= @pet.weight %>
-  </li>
+      <div class="block w-full overflow-x-auto">
+        <!-- table -->
+        <table class="items-center w-full bg-transparent border-collapse">
+          <thead>
+            <tr>
+              <th class="px-6 align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+                Nombre
+              </th>
+              <th class="px-6 align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+                Dosis
+              </th>
+              <th class="px-6 align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+                Frecuencia
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= for medication <- @pet.medications do %>
+              <tr class="capitalize">
+                <th class="px-6 py-2 align-middle border border-solid border-l-0 border-r-1 text-sm whitespace-nowrap text-left">
+                  <span class="font-bold text-gray-600"><%= medication.name %></span>
+                </th>
+                <td class="px-6 py-2 align-middle border border-solid border-l-0 border-r-1 text-sm whitespace-nowrap">
+                  <%= medication.dosage %>
+                </td>
+                <td class="px-6 py-2 align-middle border border-solid border-l-0 border-r-0 text-sm whitespace-nowrap">
+                  <%= medication.frequency %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
 
-  <li>
-    <strong>Food type:</strong>
-    <%= @pet.food_type %>
-  </li>
+  <% end %>
 
-  <li>
-    <strong>Consumption frequency:</strong>
-    <%= @pet.consumption_frequency %>
-  </li>
-
-  <li>
-    <strong>Food brand:</strong>
-    <%= @pet.food_brand %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.pet_path(@conn, :edit, @pet) %></span> |
-<span><%= link "Back", to: Routes.pet_path(@conn, :index) %></span>
+  <div class="mt-10">
+    <%= link "◀︎ Volver",
+      to: Routes.pet_path(@conn, :index),
+      class: "bg-blue-500 text-white hover:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+    %>
+  </div>
+</div>

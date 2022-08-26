@@ -7,9 +7,9 @@
 
   <div class="bg-white rounded-t p-6">
     <div class="flex flex-wrap justify-between items-center">
-      <h6 class="w-full sm:w-auto text-center text-gray-700 text-xl font-bold">
+      <h6 class="text-center text-gray-600 text-xl">
         <%= if @conn.private.phoenix_action == :edit do %>
-          Actualizar datos de <%= @contact.name %>
+          Actualizar datos de <span class="text-gray-700 font-bold"><%= @contact.name %></span>
         <% else %>
           Registrar Contacto
         <% end %>

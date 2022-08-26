@@ -6,9 +6,13 @@
   </div>
 </div>
 
-<%= render "diseases_form.html", Map.put(assigns, :action, Routes.pet_path(@conn, :update_clinical_profile, %{"id" => @pet.id})) %>
+<%= if Enum.any?(@pet.diseases) do %>
+  <%= render "diseases_form.html", Map.put(assigns, :action, Routes.pet_path(@conn, :update_clinical_profile, %{"id" => @pet.id})) %>
+<% end %>
 <%= render "disease.html", Map.put(assigns, :action, Routes.pet_path(@conn, :create_disease)) %>
-<%= render "vaccines_form.html", Map.put(assigns, :action, Routes.pet_path(@conn, :update_clinical_profile, %{"id" => @pet.id})) %>
+<%= if Enum.any?(@pet.vaccines) do %>
+  <%= render "vaccines_form.html", Map.put(assigns, :action, Routes.pet_path(@conn, :update_clinical_profile, %{"id" => @pet.id})) %>
+<% end %>
 <%= render "vaccine.html", Map.put(assigns, :action, Routes.pet_path(@conn, :create_vaccine)) %>
 
 <div class="px-4 lg:px-10 pt-0 pb-10">

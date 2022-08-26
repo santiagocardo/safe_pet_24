@@ -6,12 +6,18 @@ defmodule SafePet24Web.PetController do
 
   def index(conn, _params) do
     pets = Pets.list_pets()
-    render(conn, "index.html", pets: pets)
+
+    conn
+    |> assign(:page_title, "Tus Mascotas")
+    |> render("index.html", pets: pets)
   end
 
   def new(conn, _params) do
     changeset = Pets.change_pet(%Pet{})
-    render(conn, "new.html", changeset: changeset)
+
+    conn
+    |> assign(:page_title, "Registrar Mascota")
+    |> render("new.html", changeset: changeset)
   end
 
   def create(conn, %{"pet" => pet_params}) do
@@ -39,7 +45,9 @@ defmodule SafePet24Web.PetController do
     pet = Pets.get_pet!(id)
     changeset = Pets.change_pet(pet)
 
-    render(conn, "edit.html", pet: pet, changeset: changeset)
+    conn
+    |> assign(:page_title, "Editar Mascota")
+    |> render("edit.html", pet: pet, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "pet" => pet_params}) do
@@ -73,6 +81,7 @@ defmodule SafePet24Web.PetController do
 
     conn
     |> put_session(:current_pet_id, pet.id)
+    |> assign(:page_title, "Perfil Clínico de tu Mascota")
     |> render("clinical_profile.html",
       pet: pet,
       changeset: changeset,

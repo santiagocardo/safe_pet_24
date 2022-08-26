@@ -66,15 +66,7 @@
       <div class="w-full lg:w-4/12 px-4">
         <div class="relative w-full mb-3">
           <%= label f, "Fecha de nacimiento", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
-          <%= date_select f, :birthdate, default: DateTime.utc_now(), builder: fn b -> %>
-          <div class="flex items-center justify-between">
-            <%= b.(:day, [class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"]) %>
-            <span class="px-2">/</span>
-            <%= b.(:month, [class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"]) %>
-            <span class="px-2">/</span>
-            <%= b.(:year, [class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"]) %>
-          </div>
-          <% end %>
+          <%= date_input f, :birthdate, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
           <%= error_tag f, :birthdate %>
         </div>
       </div>

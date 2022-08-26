@@ -104,7 +104,7 @@ defmodule SafePet24.Pets do
     Pet.changeset(pet, attrs)
   end
 
-  def total_pets, do: Repo.one(from v in Pet, select: fragment("count(*)"))
+  def total_pets, do: Repo.one(from p in Pet, select: fragment("count(*)"))
 
   def get_disease!(id), do: Repo.get!(Disease, id) |> Repo.preload(:pet)
 

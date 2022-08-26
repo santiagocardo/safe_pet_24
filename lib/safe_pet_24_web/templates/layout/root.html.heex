@@ -67,7 +67,7 @@
             <!-- Navigation -->
             <ul class="md:flex-col md:min-w-full flex flex-col list-none">
               <li class="items-center">
-                <%= live_redirect to: Routes.pet_path(@conn, :index) do %>
+                <%= link to: Routes.pet_path(@conn, :index) do %>
                   <div class="text-xs uppercase py-3 font-bold block text-gray-700 hover:text-gray-500">
                     <i class="fas fa-paw mr-2 text-sm text-gray-300"></i>
                     Listado
@@ -76,7 +76,7 @@
               </li>
 
               <li class="items-center">
-                <%= live_redirect to: Routes.pet_path(@conn, :new) do %>
+                <%= link to: Routes.pet_path(@conn, :new) do %>
                   <div class="text-xs uppercase py-3 font-bold block text-gray-700 hover:text-gray-500">
                     <i class="fas fa-plus mr-2 text-sm text-gray-300"></i>
                     Registrar
@@ -95,12 +95,21 @@
             <!-- Navigation -->
             <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li class="items-center">
-                <%# <%= live_redirect to: Routes.service_index_path(@conn, :index) do %>
+                <%= link to: Routes.contact_path(@conn, :index) do %>
+                  <div class="text-xs uppercase py-3 font-bold block text-gray-700 hover:text-gray-500">
+                    <i class="fas fa-list mr-2 text-sm text-gray-300"></i>
+                    Listado
+                  </div>
+                <% end %>
+              </li>
+
+              <li class="items-center">
+                <%= link to: Routes.contact_path(@conn, :new) do %>
                   <div class="text-xs uppercase py-3 font-bold block text-gray-700 hover:text-gray-500">
                     <i class="fas fa-user-plus mr-2 text-sm text-gray-300"></i>
                     Registrar
                   </div>
-                <%# <% end %>
+                <% end %>
               </li>
             </ul>
 
@@ -199,13 +208,15 @@
                 <img alt="banner" class="w-2/6 md:w-1/6 p-2 align-middle border-none shadow-xs" src={Routes.static_path(@conn, "/images/banner.png")} />
                 <div class="w-full md:w-4/12 px-4">
                   <div class="text-sm text-gray-500 font-semibold py-1 text-center">
-                    Copyright © <span id="get-current-year"></span>
+                    Made with ♥︎ by
                     <a
                       href="https://www.santiagocardona.co/"
+                      target="_blank"
                       class="text-gray-500 hover:text-gray-700 text-sm font-semibold py-1"
                     >
                       Santiago Cardona
                     </a>
+                    <span id="get-current-year"></span>
                   </div>
                 </div>
               </div>

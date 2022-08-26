@@ -1,0 +1,65 @@
+<.form let={f} for={@changeset} action={@action}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Ups, algo estuvo mal! Por favor revisa los errores abajo.</p>
+    </div>
+  <% end %>
+
+  <div class="bg-white rounded-t p-6">
+    <div class="flex flex-wrap justify-between items-center">
+      <h6 class="w-full sm:w-auto text-center text-gray-700 text-xl font-bold">
+        <%= if @conn.private.phoenix_action == :edit do %>
+          Actualizar datos de <%= @contact.name %>
+        <% else %>
+          Registrar Contacto
+        <% end %>
+      </h6>
+      <%= submit "Guardar",
+        phx_disable_with: "Guardando...",
+        class: "my-2 sm:my-0 text-center w-full sm:w-auto bg-blue-500 text-white hover:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+      %>
+    </div>
+  </div>
+
+  <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+    <h6 class="text-gray-400 text-sm mt-3 mb-6 font-bold uppercase">
+      Información de Contacto
+    </h6>
+    <div class="flex flex-wrap">
+      <div class="w-full lg:w-4/12 px-4">
+        <div class="relative w-full mb-3">
+          <%= label f, "Nombre Completo", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+          <%= text_input f, :name, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= error_tag f, :name %>
+        </div>
+      </div>
+      <div class="w-full lg:w-4/12 px-4">
+        <div class="relative w-full mb-3">
+          <%= label f, "Teléfono", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+          <%= text_input f, :phone, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= error_tag f, :phone %>
+        </div>
+      </div>
+      <div class="w-full lg:w-4/12 px-4">
+        <div class="relative w-full mb-3">
+          <%= label f, "Correo", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+          <%= email_input f, :email, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= error_tag f, :email %>
+        </div>
+      </div>
+      <div class="w-full lg:w-4/12 px-4">
+        <div class="relative w-full mb-3">
+          <%= label f, "Dirección", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+          <%= text_input f, :address, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= error_tag f, :address %>
+        </div>
+      </div>
+    </div>
+    <div class="pt-8">
+      <%= link "◀︎ Volver",
+        to: Routes.contact_path(@conn, :index),
+        class: "bg-blue-500 text-white hover:bg-blue-600 font-bold uppercase text-xs m-4 px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+      %>
+    </div>
+  </div>
+</.form>

@@ -6,5 +6,5 @@ defmodule SafePet24Web.LayoutView do
   @compile {:no_warn_undefined, {Routes, :live_dashboard_path, 2}}
 
   def total_pets, do: SafePet24.Pets.total_pets()
-  def total_contacts, do: SafePet24.Pets.total_pets()
+  def total_contacts, do: SafePet24.Contacts.total_contacts()
 end

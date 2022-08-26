@@ -17,12 +17,14 @@
       <table class="items-center w-full bg-transparent border-collapse">
         <thead>
           <tr>
-            <th class="px-6 py-3 align-middle text-xs uppercase whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+            <th class="px-6 py-3 align-middle text-xs uppercase whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
               Nombre
             </th>
-            <th class="px-6 py-3 align-middle text-xs uppercase whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+            <th class="px-6 py-3 align-middle text-xs uppercase whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
               Fecha
             </th>
+            <th class="px-6 py-3 align-middle text-xs uppercase whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100"></th>
+            <th class="px-6 py-3 align-middle text-xs uppercase whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100"></th>
           </tr>
         </thead>
         <tbody id="vaccines">
@@ -37,16 +39,16 @@
                 <%= error_tag vaccine, :date %>
               </td>
               <td class="py-2 align-middle text-sm whitespace-nowrap">
-                <%= link "Eliminar",
-                  to: Routes.pet_path(@conn, :delete_vaccine, %{"id" => vaccine.data.id}), method: :delete, data: [confirm: "Estás seguro/a?"],
-                  class: "py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
-                %>
+                <%= link to: Routes.pet_path(@conn, :delete_vaccine, %{"id" => vaccine.data.id}), method: :delete, data: [confirm: "Estás seguro/a?"], class: "py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700" do %>
+                  <i class="fas fa-trash mr-2 text-sm text-gray-500"></i>
+                  Eliminar
+                <% end %>
               </td>
               <td class="py-2 align-middle text-sm whitespace-nowrap">
-                <%= submit "Actualizar",
-                  phx_disable_with: "Actualizando...",
-                  class: "my-2 sm:my-0 text-center w-full sm:w-auto bg-blue-500 text-white hover:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-                %>
+                <%= submit phx_disable_with: "Actualizando...", class: "py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700" do %>
+                  <i class="fas fa-save mr-2 text-sm text-gray-500"></i>
+                  Actualizar
+                <% end %>
               </td>
             </tr>
           <% end %>

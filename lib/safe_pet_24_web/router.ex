@@ -78,6 +78,15 @@ defmodule SafePet24Web.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+
+    get "/pets/clinical-profile", PetController, :clinical_profile
+    put "/pets/clinical-profile", PetController, :update_clinical_profile
+    delete "/pets/disease", PetController, :delete_disease
+    post "/pets/disease", PetController, :create_disease
+    delete "/pets/vaccine", PetController, :delete_vaccine
+    post "/pets/vaccine", PetController, :create_vaccine
+    resources "/pets", PetController
+    resources "/contacts", ContactController
   end
 
   scope "/", SafePet24Web do
@@ -88,13 +97,5 @@ defmodule SafePet24Web.Router do
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :edit
     post "/users/confirm/:token", UserConfirmationController, :update
-
-    get "/pets/clinical-profile", PetController, :clinical_profile
-    put "/pets/clinical-profile", PetController, :update_clinical_profile
-    delete "/pets/disease", PetController, :delete_disease
-    post "/pets/disease", PetController, :create_disease
-    delete "/pets/vaccine", PetController, :delete_vaccine
-    post "/pets/vaccine", PetController, :create_vaccine
-    resources "/pets", PetController
   end
 end

@@ -10,6 +10,7 @@ defmodule SafePet24.Accounts.User do
     field :confirmed_at, :naive_datetime
 
     has_many :pets, SafePet24.Pets.Pet
+    has_many :contacts, SafePet24.Contacts.Contact
 
     timestamps()
   end

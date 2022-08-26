@@ -1,7 +1,7 @@
 <div class="rounded-t bg-white p-6">
   <div class="flex flex-wrap justify-center items-center">
     <h6 class="w-full sm:w-auto text-center text-gray-700 text-xl font-bold">
-      Tus Mascotas
+      Tus Contactos
     </h6>
   </div>
 </div>
@@ -12,54 +12,52 @@
     <thead>
       <tr>
         <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
-          Nombre
+          Nombre Completo
         </th>
         <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
-          Especie
+          Teléfono
         </th>
         <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
-          Raza
+          Correo
+        </th>
+        <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+          Dirección
         </th>
         <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100"></th>
       </tr>
     </thead>
-    <tbody id="pets">
-      <%= for pet <- @pets do %>
-        <tr id={"pet-#{pet.id}"} class="capitalize border-t-2">
+    <tbody id="contacts">
+      <%= for contact <- @contacts do %>
+        <tr id={"contact-#{contact.id}"} class="border-t-2">
           <th class="px-6 py-2 align-middle border-t-0 border-l-0 border-r-0 text-sm whitespace-nowrap text-left">
-            <%= link to: Routes.pet_path(@conn, :show, pet) do %>
-              <span class="font-bold text-gray-600"><%= pet.name %></span>
+            <%= link to: Routes.contact_path(@conn, :show, contact) do %>
+              <span class="font-bold text-gray-600"><%= contact.name %></span>
             <% end %>
           </th>
           <td class="px-6 py-2 align-middle border-t-0 border-l-0 border-r-0 text-sm whitespace-nowrap">
-            <%= pet.species %>
+            <%= contact.phone %>
           </td>
           <td class="px-6 py-2 align-middle border-t-0 border-l-0 border-r-0 text-sm whitespace-nowrap">
-            <%= pet.breed %>
+            <%= contact.email %>
+          </td>
+          <td class="px-6 py-2 align-middle border-t-0 border-l-0 border-r-0 text-sm whitespace-nowrap">
+            <%= contact.address %>
           </td>
           <td class="px-6 py-2 align-middle border-t-0 border-l-0 border-r-0 text-sm whitespace-nowrap text-right">
             <a
               href="#menu"
               class="text-gray-500 block py-1 px-3"
-              onclick={"openDropdown(event,'table-light-1-dropdown-#{pet.id}')"}
+              onclick={"openDropdown(event,'table-light-1-dropdown-#{contact.id}')"}
             >
               <i class="fas fa-ellipsis-v"></i>
             </a>
-            <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48" id={"table-light-1-dropdown-#{pet.id}"}>
-              <%= link "Ver",
-                to: Routes.pet_path(@conn, :show, pet),
-                class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
-              %>
+            <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48" id={"table-light-1-dropdown-#{contact.id}"}>
               <%= link "Editar",
-                to: Routes.pet_path(@conn, :edit, pet),
-                class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
-              %>
-              <%= link "Perfil Clínico",
-                to: Routes.pet_path(@conn, :clinical_profile, %{"id" => pet.id}),
+                to: Routes.contact_path(@conn, :edit, contact),
                 class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
               %>
               <%= link "Eliminar",
-                to: Routes.pet_path(@conn, :delete, pet), method: :delete, data: [confirm: "Estás seguro/a?"],
+                to: Routes.contact_path(@conn, :delete, contact), method: :delete, data: [confirm: "Estás seguro/a?"],
                 class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
               %>
             </div>

@@ -15,7 +15,7 @@ defmodule SafePet24.Repo.Migrations.CreatePets do
       add :food_type, :string
       add :consumption_frequency, :string
       add :food_brand, :string
-      add :user_id, references(:users, on_delete: :nothing), null: false
+      add :user_id, references(:users, on_delete: :delete_all), null: false
 
       timestamps()
     end

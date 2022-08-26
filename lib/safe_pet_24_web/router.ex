@@ -85,6 +85,8 @@ defmodule SafePet24Web.Router do
     post "/pets/disease", PetController, :create_disease
     delete "/pets/vaccine", PetController, :delete_vaccine
     post "/pets/vaccine", PetController, :create_vaccine
+    delete "/pets/medication", PetController, :delete_medication
+    post "/pets/medication", PetController, :create_medication
     resources "/pets", PetController
     resources "/contacts", ContactController
   end

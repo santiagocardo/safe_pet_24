@@ -64,7 +64,10 @@
     <%= if @pet.reward do %>
       <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
         <span class="uppercase text-gray-600 text-xs font-bold mb-2">Recompensa:</span>
-        <p class="inline-block text-sm"><%= @pet.reward %></p>
+        <p class="inline-block text-sm">
+          <%= @pet.reward %>
+          <i class="fas fa-dollar-sign text-lime-700"></i>
+        </p>
       </div>
     <% end %>
   </div>

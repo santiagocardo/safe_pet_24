@@ -9,6 +9,7 @@ defmodule SafePet24.Pets do
   alias SafePet24.Pets.Pet
   alias SafePet24.Pets.Disease
   alias SafePet24.Pets.Vaccine
+  alias SafePet24.Pets.Medication
 
   @doc """
   Returns the list of pets.
@@ -136,5 +137,21 @@ defmodule SafePet24.Pets do
 
   def change_vaccine(%Vaccine{} = vaccine, attrs \\ %{}) do
     Vaccine.changeset(vaccine, attrs)
+  end
+
+  def get_medication!(id), do: Repo.get!(Medication, id) |> Repo.preload(:pet)
+
+  def create_medication(attrs \\ %{}) do
+    %Medication{}
+    |> Medication.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def delete_medication(%Medication{} = medication) do
+    Repo.delete(medication)
+  end
+
+  def change_medication(%Medication{} = medication, attrs \\ %{}) do
+    Medication.changeset(medication, attrs)
   end
 end

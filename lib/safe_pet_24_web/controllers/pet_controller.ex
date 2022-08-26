@@ -77,19 +77,16 @@ defmodule SafePet24Web.PetController do
 
   def clinical_profile(conn, %{"id" => id}) do
     pet = Pets.get_pet!(id)
-    changeset = Pets.change_pet(pet)
-    disease_changeset = Pets.change_disease(%Pets.Disease{})
-    vaccine_changeset = Pets.change_vaccine(%Pets.Vaccine{})
+
+    assigns =
+      pet
+      |> clinical_profile_changesets()
+      |> Keyword.merge(pet: pet)
 
     conn
     |> put_session(:current_pet_id, pet.id)
     |> assign(:page_title, "Perfil Clínico de tu Mascota")
-    |> render("clinical_profile.html",
-      pet: pet,
-      changeset: changeset,
-      disease_changeset: disease_changeset,
-      vaccine_changeset: vaccine_changeset
-    )
+    |> render("clinical_profile.html", assigns)
   end
 
   def update_clinical_profile(conn, %{"id" => id, "pet" => pet_params}) do
@@ -102,15 +99,12 @@ defmodule SafePet24Web.PetController do
         |> redirect(to: Routes.pet_path(conn, :clinical_profile, %{"id" => pet.id}) <> "#content")
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        disease_changeset = Pets.change_disease(%Pets.Disease{})
-        vaccine_changeset = Pets.change_vaccine(%Pets.Vaccine{})
+        assigns =
+          pet
+          |> clinical_profile_changesets()
+          |> Keyword.merge(pet: pet, changeset: changeset)
 
-        render(conn, "clinical_profile.html",
-          pet: pet,
-          changeset: changeset,
-          disease_changeset: disease_changeset,
-          vaccine_changeset: vaccine_changeset
-        )
+        render(conn, "clinical_profile.html", assigns)
     end
   end
 
@@ -128,15 +122,13 @@ defmodule SafePet24Web.PetController do
 
       {:error, %Ecto.Changeset{} = disease_changeset} ->
         pet = Pets.get_pet!(pet_id)
-        changeset = Pets.change_pet(pet)
-        vaccine_changeset = Pets.change_vaccine(%Pets.Vaccine{})
 
-        render(conn, "clinical_profile.html",
-          pet: pet,
-          changeset: changeset,
-          disease_changeset: disease_changeset,
-          vaccine_changeset: vaccine_changeset
-        )
+        assigns =
+          pet
+          |> clinical_profile_changesets()
+          |> Keyword.merge(pet: pet, disease_changeset: disease_changeset)
+
+        render(conn, "clinical_profile.html", assigns)
     end
   end
 
@@ -165,15 +157,13 @@ defmodule SafePet24Web.PetController do
 
       {:error, %Ecto.Changeset{} = vaccine_changeset} ->
         pet = Pets.get_pet!(pet_id)
-        changeset = Pets.change_pet(pet)
-        disease_changeset = Pets.change_disease(%Pets.Disease{})
 
-        render(conn, "clinical_profile.html",
-          pet: pet,
-          changeset: changeset,
-          disease_changeset: disease_changeset,
-          vaccine_changeset: vaccine_changeset
-        )
+        assigns =
+          pet
+          |> clinical_profile_changesets()
+          |> Keyword.merge(pet: pet, vaccine_changeset: vaccine_changeset)
+
+        render(conn, "clinical_profile.html", assigns)
     end
   end
 
@@ -186,5 +176,57 @@ defmodule SafePet24Web.PetController do
     |> redirect(
       to: Routes.pet_path(conn, :clinical_profile, %{"id" => vaccine.pet_id}) <> "#vaccines"
     )
+  end
+
+  def create_medication(conn, %{"medication" => medication_params}) do
+    pet_id = get_in(conn.private, [:plug_session, "current_pet_id"])
+    medication_params = Map.put(medication_params, "pet_id", pet_id)
+    medication_params |> IO.inspect()
+
+    case Pets.create_medication(medication_params) do
+      {:ok, medication} ->
+        conn
+        |> put_flash(:info, "Medicamento registrado exitosamente.")
+        |> redirect(
+          to:
+            Routes.pet_path(conn, :clinical_profile, %{"id" => medication.pet_id}) <>
+              "#medications"
+        )
+
+      {:error, %Ecto.Changeset{} = medication_changeset} ->
+        pet = Pets.get_pet!(pet_id)
+
+        assigns =
+          pet
+          |> clinical_profile_changesets()
+          |> Keyword.merge(pet: pet, medication_changeset: medication_changeset)
+
+        render(conn, "clinical_profile.html", assigns)
+    end
+  end
+
+  def delete_medication(conn, %{"id" => id}) do
+    medication = Pets.get_medication!(id)
+    {:ok, _pet} = Pets.delete_medication(medication)
+
+    conn
+    |> put_flash(:info, "Medicamento eliminado exitosamente.")
+    |> redirect(
+      to: Routes.pet_path(conn, :clinical_profile, %{"id" => medication.pet_id}) <> "#medications"
+    )
+  end
+
+  defp clinical_profile_changesets(%Pet{} = pet) do
+    changeset = Pets.change_pet(pet)
+    disease_changeset = Pets.change_disease(%Pets.Disease{})
+    vaccine_changeset = Pets.change_vaccine(%Pets.Vaccine{})
+    medication_changeset = Pets.change_medication(%Pets.Medication{})
+
+    [
+      changeset: changeset,
+      disease_changeset: disease_changeset,
+      vaccine_changeset: vaccine_changeset,
+      medication_changeset: medication_changeset
+    ]
   end
 end

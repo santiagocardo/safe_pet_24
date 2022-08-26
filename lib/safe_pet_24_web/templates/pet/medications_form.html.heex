@@ -6,13 +6,13 @@
   <% end %>
 
   <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-    <h6 class="text-gray-400 text-sm mt-10 mb-6 font-bold uppercase">
-      Enfermedades
+    <h6 class="text-gray-400 text-sm mt-3 mb-6 font-bold uppercase">
+      Medicamentos
     </h6>
 
     <hr class="border-b-1 border-gray-300" />
 
-    <%= if Enum.any?(@pet.diseases) do %>
+    <%= if Enum.any?(@pet.medications) do %>
 
       <div class="block w-full overflow-x-auto">
         <!-- table -->
@@ -20,28 +20,35 @@
           <thead>
             <tr class="bg-gray-50 text-gray-500 align-middle text-xs uppercase whitespace-nowrap font-semibold text-left">
               <th class="pr-10 py-2">
-                Enfermedad
+                Medicamento
               </th>
               <th class="pr-2 py-2">
-                Cuidados a tener en cuenta
+                Dosis
+              </th>
+              <th class="pr-2 py-2">
+                Frecuencia
               </th>
               <th class="pr-2 py-2"></th>
               <th class="pr-2 py-2"></th>
             </tr>
           </thead>
-          <tbody id="diseases">
-            <%= for disease <- inputs_for(f, :diseases) do %>
+          <tbody id="medications">
+            <%= for medication <- inputs_for(f, :medications) do %>
               <tr class="align-middle border border-solid border-l-0 border-r-0 text-sm whitespace-nowrap">
                 <td class="pr-2 py-2">
-                  <%= text_input disease, :name, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
-                  <%= error_tag disease, :name %>
+                  <%= text_input medication, :name, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+                  <%= error_tag medication, :name %>
                 </td>
                 <td class="pr-2 py-2">
-                  <%= text_input disease, :care, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
-                  <%= error_tag disease, :care %>
+                  <%= text_input medication, :dosage, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+                  <%= error_tag medication, :dosage %>
                 </td>
                 <td class="pr-2 py-2">
-                  <%= link to: Routes.pet_path(@conn, :delete_disease, %{"id" => disease.data.id}), method: :delete, data: [confirm: "Estás seguro/a?"], class: "py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700" do %>
+                  <%= text_input medication, :frequency, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+                  <%= error_tag medication, :frequency %>
+                </td>
+                <td class="pr-2 py-2">
+                  <%= link to: Routes.pet_path(@conn, :delete_medication, %{"id" => medication.data.id}), method: :delete, data: [confirm: "Estás seguro/a?"], class: "py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700" do %>
                     <i class="fas fa-trash mr-2 text-sm text-gray-500"></i>
                     Eliminar
                   <% end %>

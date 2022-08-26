@@ -15,7 +15,7 @@ defmodule SafePet24.Pets.Medication do
   @doc false
   def changeset(medication, attrs) do
     medication
-    |> cast(attrs, [:name, :dosage, :frequency])
+    |> cast(attrs, [:name, :dosage, :frequency, :pet_id])
     |> validate_required([:name, :dosage, :frequency])
     |> validate_length(:name, min: 4, max: 24)
   end

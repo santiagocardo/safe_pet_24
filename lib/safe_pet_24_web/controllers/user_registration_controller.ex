@@ -9,7 +9,10 @@ defmodule SafePet24Web.UserRegistrationController do
 
   def new(conn, _params) do
     changeset = Accounts.change_user_registration(%User{})
-    render(conn, "new.html", changeset: changeset)
+
+    conn
+    |> assign(:page_title, "Registro")
+    |> render("new.html", changeset: changeset)
   end
 
   def create(conn, %{"user" => user_params}) do

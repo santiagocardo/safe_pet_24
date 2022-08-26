@@ -7,7 +7,9 @@ defmodule SafePet24Web.UserSessionController do
   plug :put_root_layout, "session.html"
 
   def new(conn, _params) do
-    render(conn, "new.html", error_message: nil)
+    conn
+    |> assign(:page_title, "Iniciar Sesión")
+    |> render("new.html", error_message: nil)
   end
 
   def create(conn, %{"user" => user_params}) do

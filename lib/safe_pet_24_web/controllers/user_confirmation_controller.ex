@@ -6,7 +6,9 @@ defmodule SafePet24Web.UserConfirmationController do
   plug :put_root_layout, "session.html"
 
   def new(conn, _params) do
-    render(conn, "new.html")
+    conn
+    |> assign(:page_title, "Confirmar Usuario")
+    |> render("new.html")
   end
 
   def create(conn, %{"user" => %{"email" => email}}) do

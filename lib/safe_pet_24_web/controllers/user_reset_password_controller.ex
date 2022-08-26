@@ -7,7 +7,9 @@ defmodule SafePet24Web.UserResetPasswordController do
   plug :get_user_by_reset_password_token when action in [:edit, :update]
 
   def new(conn, _params) do
-    render(conn, "new.html")
+    conn
+    |> assign(:page_title, "Restablecer Contraseña")
+    |> render("new.html")
   end
 
   def create(conn, %{"user" => %{"email" => email}}) do

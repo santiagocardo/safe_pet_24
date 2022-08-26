@@ -7,7 +7,9 @@ defmodule SafePet24Web.UserSettingsController do
   plug :assign_email_and_password_changesets
 
   def edit(conn, _params) do
-    render(conn, "edit.html")
+    conn
+    |> assign(:page_title, "Configuración de Cuenta")
+    |> render("edit.html")
   end
 
   def update(conn, %{"action" => "update_email"} = params) do

@@ -13,9 +13,7 @@
   <div class="flex flex-wrap">
     <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
       <span class="uppercase text-gray-600 text-xs font-bold mb-2">Especie:</span>
-      <p class="inline-block text-sm">
-        <%= if @pet.species == "canino" do "Canino" else "Felino" end %>
-      </p>
+      <p class="capitalize inline-block text-sm"><%= @pet.species %></p>
     </div>
     <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
       <span class="uppercase text-gray-600 text-xs font-bold mb-2">Raza:</span>
@@ -85,22 +83,22 @@
         <!-- table -->
         <table class="items-center w-full bg-transparent border-collapse">
           <thead>
-            <tr>
-              <th class="px-6 align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
-                Nombre
+            <tr class="align-middle text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+              <th class="p-3">
+                Enfermedad
               </th>
-              <th class="px-6 align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+              <th class="p-3">
                 Cuidados
               </th>
             </tr>
           </thead>
           <tbody>
             <%= for disease <- @pet.diseases do %>
-              <tr class="capitalize">
-                <th class="px-6 py-2 align-middle border border-solid border-l-0 border-r-1 text-sm whitespace-nowrap text-left">
-                  <span class="font-bold text-gray-600"><%= disease.name %></span>
+              <tr class="align-middle text-sm text-left whitespace-nowrap">
+                <th class="p-3 border border-solid border-l-0 border-r-1">
+                  <span class="capitalize font-bold text-gray-600"><%= disease.name %></span>
                 </th>
-                <td class="px-6 py-2 align-middle border border-solid border-l-0 border-r-0 text-sm whitespace-nowrap">
+                <td class="p-3 border border-solid border-l-0 border-r-0">
                   <%= disease.care %>
                 </td>
               </tr>
@@ -119,22 +117,22 @@
         <!-- table -->
         <table class="items-center w-full bg-transparent border-collapse">
           <thead>
-            <tr>
-              <th class="px-6 align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
-                Nombre
+            <tr class="align-middle text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+              <th class="p-3">
+                Vacuna
               </th>
-              <th class="px-6 align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+              <th class="p-3">
                 Fecha
               </th>
             </tr>
           </thead>
           <tbody>
             <%= for vaccine <- @pet.vaccines do %>
-              <tr class="capitalize">
-                <th class="px-6 py-2 align-middle border border-solid border-l-0 border-r-1 text-sm whitespace-nowrap text-left">
-                  <span class="font-bold text-gray-600"><%= vaccine.name %></span>
+              <tr class="align-middle text-sm text-left whitespace-nowrap">
+                <th class="p-3 border border-solid border-l-0 border-r-1">
+                  <span class="capitalize font-bold text-gray-600"><%= vaccine.name %></span>
                 </th>
-                <td class="px-6 py-2 align-middle border border-solid border-l-0 border-r-0 text-sm whitespace-nowrap">
+                <td class="p-3 border border-solid border-l-0 border-r-0">
                   <%= vaccine.date %>
                 </td>
               </tr>
@@ -153,28 +151,28 @@
         <!-- table -->
         <table class="items-center w-full bg-transparent border-collapse">
           <thead>
-            <tr>
-              <th class="px-6 align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
-                Nombre
+            <tr class="align-middle text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+              <th class="p-3">
+                Medicamento
               </th>
-              <th class="px-6 align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+              <th class="p-3">
                 Dosis
               </th>
-              <th class="px-6 align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+              <th class="p-3">
                 Frecuencia
               </th>
             </tr>
           </thead>
           <tbody>
             <%= for medication <- @pet.medications do %>
-              <tr class="capitalize">
-                <th class="px-6 py-2 align-middle border border-solid border-l-0 border-r-1 text-sm whitespace-nowrap text-left">
-                  <span class="font-bold text-gray-600"><%= medication.name %></span>
+              <tr class="align-middle text-sm text-left whitespace-nowrap">
+                <th class="p-3 border border-solid border-l-0 border-r-1">
+                  <span class="capitalize font-bold text-gray-600"><%= medication.name %></span>
                 </th>
-                <td class="px-6 py-2 align-middle border border-solid border-l-0 border-r-1 text-sm whitespace-nowrap">
+                <td class="p-3 border border-solid border-l-0 border-r-1">
                   <%= medication.dosage %>
                 </td>
-                <td class="px-6 py-2 align-middle border border-solid border-l-0 border-r-0 text-sm whitespace-nowrap">
+                <td class="p-3 border border-solid border-l-0 border-r-0">
                   <%= medication.frequency %>
                 </td>
               </tr>

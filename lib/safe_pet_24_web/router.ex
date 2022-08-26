@@ -17,12 +17,6 @@ defmodule SafePet24Web.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", SafePet24Web do
-    pipe_through :browser
-
-    get "/", PageController, :index
-  end
-
   # Other scopes may use custom stacks.
   # scope "/api", SafePet24Web do
   #   pipe_through :api
@@ -75,10 +69,7 @@ defmodule SafePet24Web.Router do
   scope "/", SafePet24Web do
     pipe_through [:browser, :require_authenticated_user]
 
-    get "/users/settings", UserSettingsController, :edit
-    put "/users/settings", UserSettingsController, :update
-    get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
-
+    get "/", PetController, :index
     get "/pets/clinical-profile", PetController, :clinical_profile
     put "/pets/clinical-profile", PetController, :update_clinical_profile
     delete "/pets/disease", PetController, :delete_disease
@@ -89,6 +80,10 @@ defmodule SafePet24Web.Router do
     post "/pets/medication", PetController, :create_medication
     resources "/pets", PetController
     resources "/contacts", ContactController
+
+    get "/users/settings", UserSettingsController, :edit
+    put "/users/settings", UserSettingsController, :update
+    get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
   end
 
   scope "/", SafePet24Web do

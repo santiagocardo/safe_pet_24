@@ -26,7 +26,7 @@ defmodule SafePet24Web.ContactController do
     case Contacts.create_contact(contact_params) do
       {:ok, contact} ->
         conn
-        |> put_flash(:info, "Contacto creado existosamente.")
+        |> put_flash(:info, "Contacto creado exitosamente.")
         |> redirect(to: Routes.contact_path(conn, :show, contact))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -54,7 +54,7 @@ defmodule SafePet24Web.ContactController do
     case Contacts.update_contact(contact, contact_params) do
       {:ok, _contact} ->
         conn
-        |> put_flash(:info, "Contacto actualizado existosamente.")
+        |> put_flash(:info, "Contacto actualizado exitosamente.")
         |> redirect(to: Routes.contact_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -67,7 +67,7 @@ defmodule SafePet24Web.ContactController do
     {:ok, _contact} = Contacts.delete_contact(contact)
 
     conn
-    |> put_flash(:info, "Contacto eliminado existosamente.")
+    |> put_flash(:info, "Contacto eliminado exitosamente.")
     |> redirect(to: Routes.contact_path(conn, :index))
   end
 end

@@ -3,6 +3,7 @@ defmodule SafePet24Web.UserResetPasswordController do
 
   alias SafePet24.Accounts
 
+  plug :put_root_layout, "session.html"
   plug :get_user_by_reset_password_token when action in [:edit, :update]
 
   def new(conn, _params) do
@@ -20,7 +21,7 @@ defmodule SafePet24Web.UserResetPasswordController do
     conn
     |> put_flash(
       :info,
-      "If your email is in our system, you will receive instructions to reset your password shortly."
+      "Si su correo electrónico está en nuestro sistema, recibirá instrucciones para restablecer su contraseña en breve."
     )
     |> redirect(to: "/")
   end

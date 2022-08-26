@@ -5,6 +5,8 @@ defmodule SafePet24Web.UserRegistrationController do
   alias SafePet24.Accounts.User
   alias SafePet24Web.UserAuth
 
+  plug :put_root_layout, "session.html"
+
   def new(conn, _params) do
     changeset = Accounts.change_user_registration(%User{})
     render(conn, "new.html", changeset: changeset)
@@ -20,7 +22,7 @@ defmodule SafePet24Web.UserRegistrationController do
           )
 
         conn
-        |> put_flash(:info, "User created successfully.")
+        |> put_flash(:info, "Usuario creado exitosamente.")
         |> UserAuth.log_in_user(user)
 
       {:error, %Ecto.Changeset{} = changeset} ->

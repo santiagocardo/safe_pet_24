@@ -1,5 +1,3 @@
-<h1>Log in</h1>
-
 <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
   <%= if @error_message do %>
     <div class="alert alert-danger">
@@ -7,21 +5,24 @@
     </div>
   <% end %>
 
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
-
-  <%= label f, :password %>
-  <%= password_input f, :password, required: true %>
-
-  <%= label f, :remember_me, "Keep me logged in for 60 days" %>
-  <%= checkbox f, :remember_me %>
-
-  <div>
-    <%= submit "Log in" %>
+  <div class="relative w-full my-2">
+    <%= label f, :email, "Usuario", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+    <%= email_input f, :email, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+  </div>
+  <div class="relative w-full my-2">
+    <%= label f, :password, "Contraseña", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+    <%= password_input f, :password, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+  </div>
+  <div class="relative w-full my-2">
+    <%= label f, :remember_me, "Mantener sesión por 60 días" %>
+    <%= checkbox f, :remember_me %>
+  </div>
+  <div class="text-center mt-6">
+    <%= submit "Iniciar Sesión", class: "bg-gray-800 text-white active:bg-gray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150" %>
   </div>
 </.form>
 
 <p>
-  <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
-  <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
+  <%= link "Registrase", to: Routes.user_registration_path(@conn, :new) %> |
+  <%= link "Olvidé mi contraseña", to: Routes.user_reset_password_path(@conn, :new) %>
 </p>

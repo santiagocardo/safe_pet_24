@@ -3,6 +3,8 @@ defmodule SafePet24Web.UserConfirmationController do
 
   alias SafePet24.Accounts
 
+  plug :put_root_layout, "session.html"
+
   def new(conn, _params) do
     render(conn, "new.html")
   end
@@ -18,8 +20,7 @@ defmodule SafePet24Web.UserConfirmationController do
     conn
     |> put_flash(
       :info,
-      "If your email is in our system and it has not been confirmed yet, " <>
-        "you will receive an email with instructions shortly."
+      "Si su correo electrónico está en nuestro sistema y aún no ha sido confirmado, recibirá un correo electrónico con instrucciones en breve."
     )
     |> redirect(to: "/")
   end
@@ -34,7 +35,7 @@ defmodule SafePet24Web.UserConfirmationController do
     case Accounts.confirm_user(token) do
       {:ok, _} ->
         conn
-        |> put_flash(:info, "User confirmed successfully.")
+        |> put_flash(:info, "Usuario confirmado exitosamente.")
         |> redirect(to: "/")
 
       :error ->
@@ -48,7 +49,7 @@ defmodule SafePet24Web.UserConfirmationController do
 
           %{} ->
             conn
-            |> put_flash(:error, "User confirmation link is invalid or it has expired.")
+            |> put_flash(:error, "El enlace de confirmación no es válido o ha expirado.")
             |> redirect(to: "/")
         end
     end

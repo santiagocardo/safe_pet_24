@@ -1,30 +1,31 @@
-<h1 class="my-12">Register</h1>
-
 <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+      <p>Ups, algo estuvo mal! Por favor revisa los errores abajo.</p>
     </div>
   <% end %>
 
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
-  <%= error_tag f, :email %>
-
-  <%= label f, :serial %>
-  <%= text_input f, :serial, required: true %>
-  <%= error_tag f, :serial %>
-
-  <%= label f, :password %>
-  <%= password_input f, :password, required: true %>
-  <%= error_tag f, :password %>
-
-  <div>
-    <%= submit "Register" %>
+  <div class="relative w-full my-2">
+    <%= label f, :email, "Usuario", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+    <%= email_input f, :email, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+    <%= error_tag f, :email %>
+  </div>
+  <div class="relative w-full my-2">
+    <%= label f, :serial, :serial, class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+    <%= text_input f, :serial, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+    <%= error_tag f, :serial %>
+  </div>
+  <div class="relative w-full my-2">
+    <%= label f, :password, "Contraseña", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+    <%= password_input f, :password, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+    <%= error_tag f, :password %>
+  </div>
+  <div class="text-center mt-6">
+    <%= submit "Registrame", class: "bg-gray-800 text-white active:bg-gray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150" %>
   </div>
 </.form>
 
 <p>
-  <%= link "Log in", to: Routes.user_session_path(@conn, :new) %> |
-  <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
+  <%= link "Iniciar Sesión", to: Routes.user_session_path(@conn, :new) %> |
+  <%= link "Olvidé mi contraseña", to: Routes.user_reset_password_path(@conn, :new) %>
 </p>

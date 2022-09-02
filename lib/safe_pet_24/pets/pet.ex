@@ -42,6 +42,9 @@ defmodule SafePet24.Pets.Pet do
       :serial,
       :user_id
     ])
+    |> cast_assoc(:diseases)
+    |> cast_assoc(:vaccines)
+    |> cast_assoc(:medications)
     |> validate_required([:name, :birthdate, :species, :breed, :serial, :user_id])
     |> validate_length(:serial, min: 6, max: 24)
     |> unsafe_validate_unique(:serial, SafePet24.Repo)

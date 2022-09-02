@@ -4,6 +4,15 @@ defmodule SafePet24Web.PetController do
   alias SafePet24.Pets
   alias SafePet24.Pets.Pet
 
+  plug :clinical_profile_changesets
+       when action in [
+              :clinical_profile,
+              :update_clinical_profile,
+              :create_disease,
+              :create_vaccine,
+              :create_medication
+            ]
+
   def index(conn, _params) do
     pets = Pets.list_pets(conn.assigns.current_user.id)
 
@@ -87,15 +96,12 @@ defmodule SafePet24Web.PetController do
     pet = Pets.get_pet!(id)
 
     if pet.user_id == conn.assigns.current_user.id do
-      assigns =
-        pet
-        |> clinical_profile_changesets()
-        |> Keyword.merge(pet: pet)
+      changeset = Pets.change_pet(pet)
 
       conn
       |> put_session(:current_pet_id, pet.id)
       |> assign(:page_title, "Perfil Clínico de tu Mascota")
-      |> render("clinical_profile.html", assigns)
+      |> render("clinical_profile.html", pet: pet, changeset: changeset)
     else
       redirect_to_index(conn)
     end
@@ -111,12 +117,7 @@ defmodule SafePet24Web.PetController do
         |> redirect(to: Routes.pet_path(conn, :clinical_profile, %{"id" => pet.id}) <> "#content")
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        assigns =
-          pet
-          |> clinical_profile_changesets()
-          |> Keyword.merge(pet: pet, changeset: changeset)
-
-        render(conn, "clinical_profile.html", assigns)
+        render(conn, "clinical_profile.html", pet: pet, changeset: changeset)
     end
   end
 
@@ -134,13 +135,13 @@ defmodule SafePet24Web.PetController do
 
       {:error, %Ecto.Changeset{} = disease_changeset} ->
         pet = Pets.get_pet!(pet_id)
+        changeset = Pets.change_pet(pet)
 
-        assigns =
-          pet
-          |> clinical_profile_changesets()
-          |> Keyword.merge(pet: pet, disease_changeset: disease_changeset)
-
-        render(conn, "clinical_profile.html", assigns)
+        render(conn, "clinical_profile.html",
+          pet: pet,
+          changeset: changeset,
+          disease_changeset: disease_changeset
+        )
     end
   end
 
@@ -169,13 +170,13 @@ defmodule SafePet24Web.PetController do
 
       {:error, %Ecto.Changeset{} = vaccine_changeset} ->
         pet = Pets.get_pet!(pet_id)
+        changeset = Pets.change_pet(pet)
 
-        assigns =
-          pet
-          |> clinical_profile_changesets()
-          |> Keyword.merge(pet: pet, vaccine_changeset: vaccine_changeset)
-
-        render(conn, "clinical_profile.html", assigns)
+        render(conn, "clinical_profile.html",
+          pet: pet,
+          changeset: changeset,
+          vaccine_changeset: vaccine_changeset
+        )
     end
   end
 
@@ -193,7 +194,6 @@ defmodule SafePet24Web.PetController do
   def create_medication(conn, %{"medication" => medication_params}) do
     pet_id = get_in(conn.private, [:plug_session, "current_pet_id"])
     medication_params = Map.put(medication_params, "pet_id", pet_id)
-    medication_params |> IO.inspect()
 
     case Pets.create_medication(medication_params) do
       {:ok, medication} ->
@@ -207,13 +207,13 @@ defmodule SafePet24Web.PetController do
 
       {:error, %Ecto.Changeset{} = medication_changeset} ->
         pet = Pets.get_pet!(pet_id)
+        changeset = Pets.change_pet(pet)
 
-        assigns =
-          pet
-          |> clinical_profile_changesets()
-          |> Keyword.merge(pet: pet, medication_changeset: medication_changeset)
-
-        render(conn, "clinical_profile.html", assigns)
+        render(conn, "clinical_profile.html",
+          pet: pet,
+          changeset: changeset,
+          medication_changeset: medication_changeset
+        )
     end
   end
 
@@ -228,18 +228,15 @@ defmodule SafePet24Web.PetController do
     )
   end
 
-  defp clinical_profile_changesets(%Pet{} = pet) do
-    changeset = Pets.change_pet(pet)
+  defp clinical_profile_changesets(conn, _opts) do
     disease_changeset = Pets.change_disease(%Pets.Disease{})
     vaccine_changeset = Pets.change_vaccine(%Pets.Vaccine{})
     medication_changeset = Pets.change_medication(%Pets.Medication{})
 
-    [
-      changeset: changeset,
-      disease_changeset: disease_changeset,
-      vaccine_changeset: vaccine_changeset,
-      medication_changeset: medication_changeset
-    ]
+    conn
+    |> assign(:disease_changeset, disease_changeset)
+    |> assign(:vaccine_changeset, vaccine_changeset)
+    |> assign(:medication_changeset, medication_changeset)
   end
 
   defp redirect_to_index(conn) do

@@ -102,5 +102,6 @@ defmodule SafePet24.Contacts do
     Contact.changeset(contact, attrs)
   end
 
-  def total_contacts, do: Repo.one(from c in Contact, select: fragment("count(*)"))
+  def total_contacts(user_id),
+    do: Repo.one(from c in Contact, where: c.user_id == ^user_id, select: fragment("count(*)"))
 end

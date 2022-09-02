@@ -1,53 +1,92 @@
-<h1>Settings</h1>
-
-<h3>Change email</h3>
+<div class="bg-white rounded-t p-6">
+  <div class="flex flex-wrap justify-center items-center">
+    <h6 class="text-center text-gray-600 text-xl">
+      Configuración de Cuenta
+    </h6>
+  </div>
+</div>
 
 <.form let={f} for={@email_changeset} action={Routes.user_settings_path(@conn, :update)} id="update_email">
   <%= if @email_changeset.action do %>
     <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+      <p>Ups, algo estuvo mal! Por favor revisa los errores abajo.</p>
     </div>
   <% end %>
 
-  <%= hidden_input f, :action, name: "action", value: "update_email" %>
-
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
-  <%= error_tag f, :email %>
-
-  <%= label f, :current_password, for: "current_password_for_email" %>
-  <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_email" %>
-  <%= error_tag f, :current_password %>
-
-  <div>
-    <%= submit "Change email" %>
+  <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+    <h6 class="text-gray-400 text-sm my-6 font-bold uppercase">
+      Cambiar Correo
+    </h6>
+    <div class="flex flex-wrap items-center">
+      <%= hidden_input f, :action, name: "action", value: "update_email" %>
+      <div class="w-full lg:w-6/12 px-4">
+        <div class="relative w-full mb-3">
+          <%= label f, "Correo", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+          <%= email_input f, :email, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= error_tag f, :email %>
+        </div>
+      </div>
+      <div class="w-full lg:w-6/12 px-4">
+        <div class="relative w-full mb-3">
+          <%= label f, "Contraseña Actual", for: "current_password_for_email", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+          <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_email", class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= error_tag f, :current_password %>
+        </div>
+      </div>
+      <div class="w-full lg:w-6/12 px-4">
+        <div class="relative w-full mb-3">
+          <%= submit "Guardar",
+            phx_disable_with: "Guardando...",
+            class: "my-2 sm:my-0 text-center w-full sm:w-auto bg-blue-500 text-white hover:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+          %>
+        </div>
+      </div>
+    </div>
   </div>
 </.form>
-
-<h3>Change password</h3>
 
 <.form let={f} for={@password_changeset} action={Routes.user_settings_path(@conn, :update)} id="update_password">
   <%= if @password_changeset.action do %>
     <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+      <p>Ups, algo estuvo mal! Por favor revisa los errores abajo.</p>
     </div>
   <% end %>
 
-  <%= hidden_input f, :action, name: "action", value: "update_password" %>
-
-  <%= label f, :password, "New password" %>
-  <%= password_input f, :password, required: true %>
-  <%= error_tag f, :password %>
-
-  <%= label f, :password_confirmation, "Confirm new password" %>
-  <%= password_input f, :password_confirmation, required: true %>
-  <%= error_tag f, :password_confirmation %>
-
-  <%= label f, :current_password, for: "current_password_for_password" %>
-  <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_password" %>
-  <%= error_tag f, :current_password %>
-
-  <div>
-    <%= submit "Change password" %>
+  <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+    <h6 class="text-gray-400 text-sm my-6 font-bold uppercase">
+      Cambiar Contraseña
+    </h6>
+    <div class="flex flex-wrap items-center">
+      <%= hidden_input f, :action, name: "action", value: "update_password" %>
+      <div class="w-full lg:w-4/12 px-4">
+        <div class="relative w-full mb-3">
+          <%= label f, "Nueva Contraseña", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+          <%= password_input f, :password, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= error_tag f, :password %>
+        </div>
+      </div>
+      <div class="w-full lg:w-4/12 px-4">
+        <div class="relative w-full mb-3">
+          <%= label f, "Confirmar Nueva Contraseña", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+          <%= password_input f, :password_confirmation, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= error_tag f, :password_confirmation %>
+        </div>
+      </div>
+      <div class="w-full lg:w-4/12 px-4">
+        <div class="relative w-full mb-3">
+          <%= label f, "Contraseña Actual", for: "current_password_for_password", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+          <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_password", class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= error_tag f, :current_password %>
+        </div>
+      </div>
+      <div class="w-full lg:w-4/12 px-4">
+        <div class="relative w-full mb-3">
+          <%= submit "Guardar",
+            phx_disable_with: "Guardando...",
+            class: "my-2 sm:my-0 text-center w-full sm:w-auto bg-blue-500 text-white hover:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+          %>
+        </div>
+      </div>
+    </div>
   </div>
 </.form>

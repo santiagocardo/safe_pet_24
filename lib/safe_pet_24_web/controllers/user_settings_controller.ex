@@ -27,7 +27,7 @@ defmodule SafePet24Web.UserSettingsController do
         conn
         |> put_flash(
           :info,
-          "A link to confirm your email change has been sent to the new address."
+          "Se ha enviado un enlace para confirmar el cambio de correo electrónico a la nueva dirección."
         )
         |> redirect(to: Routes.user_settings_path(conn, :edit))
 
@@ -43,7 +43,7 @@ defmodule SafePet24Web.UserSettingsController do
     case Accounts.update_user_password(user, password, user_params) do
       {:ok, user} ->
         conn
-        |> put_flash(:info, "Password updated successfully.")
+        |> put_flash(:info, "Contraseña actualizada exitosamente.")
         |> put_session(:user_return_to, Routes.user_settings_path(conn, :edit))
         |> UserAuth.log_in_user(user)
 
@@ -56,12 +56,15 @@ defmodule SafePet24Web.UserSettingsController do
     case Accounts.update_user_email(conn.assigns.current_user, token) do
       :ok ->
         conn
-        |> put_flash(:info, "Email changed successfully.")
+        |> put_flash(:info, "Correo cambiado exitosamente.")
         |> redirect(to: Routes.user_settings_path(conn, :edit))
 
       :error ->
         conn
-        |> put_flash(:error, "Email change link is invalid or it has expired.")
+        |> put_flash(
+          :error,
+          "El enlace de cambio de correo electrónico no es válido o ha caducado."
+        )
         |> redirect(to: Routes.user_settings_path(conn, :edit))
     end
   end

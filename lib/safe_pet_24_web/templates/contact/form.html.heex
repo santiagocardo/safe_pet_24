@@ -55,11 +55,13 @@
         </div>
       </div>
     </div>
-    <div class="pt-8">
-      <%= link "◀︎ Volver",
-        to: Routes.contact_path(@conn, :index),
-        class: "bg-cyan-500 text-white hover:bg-cyan-600 font-bold uppercase text-xs m-4 px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-      %>
-    </div>
+    <%= if @conn.private.phoenix_action == :edit do %>
+      <div class="pt-8">
+        <%= link "◀︎ Volver",
+          to: Routes.contact_path(@conn, :index),
+          class: "bg-cyan-500 text-white hover:bg-cyan-600 font-bold uppercase text-xs m-4 px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+        %>
+      </div>
+    <% end %>
   </div>
 </.form>

@@ -5,7 +5,7 @@ defmodule SafePet24Web.PetController do
   alias SafePet24.Pets.Pet
 
   def index(conn, _params) do
-    pets = Pets.list_pets()
+    pets = Pets.list_pets(conn.assigns.current_user.id)
 
     conn
     |> assign(:page_title, "Tus Mascotas")
@@ -36,20 +36,28 @@ defmodule SafePet24Web.PetController do
 
   def show(conn, %{"id" => id}) do
     pet = Pets.get_pet!(id)
-    changeset = Pets.change_pet(pet)
 
-    conn
-    |> assign(:page_title, "Ver Mascota")
-    |> render("show.html", pet: pet, changeset: changeset)
+    if pet.user_id == conn.assigns.current_user.id do
+      conn
+      |> assign(:page_title, "Ver Mascota")
+      |> render("show.html", pet: pet)
+    else
+      redirect_to_index(conn)
+    end
   end
 
   def edit(conn, %{"id" => id}) do
     pet = Pets.get_pet!(id)
-    changeset = Pets.change_pet(pet)
 
-    conn
-    |> assign(:page_title, "Editar Mascota")
-    |> render("edit.html", pet: pet, changeset: changeset)
+    if pet.user_id == conn.assigns.current_user.id do
+      changeset = Pets.change_pet(pet)
+
+      conn
+      |> assign(:page_title, "Editar Mascota")
+      |> render("edit.html", pet: pet, changeset: changeset)
+    else
+      redirect_to_index(conn)
+    end
   end
 
   def update(conn, %{"id" => id, "pet" => pet_params}) do
@@ -78,15 +86,19 @@ defmodule SafePet24Web.PetController do
   def clinical_profile(conn, %{"id" => id}) do
     pet = Pets.get_pet!(id)
 
-    assigns =
-      pet
-      |> clinical_profile_changesets()
-      |> Keyword.merge(pet: pet)
+    if pet.user_id == conn.assigns.current_user.id do
+      assigns =
+        pet
+        |> clinical_profile_changesets()
+        |> Keyword.merge(pet: pet)
 
-    conn
-    |> put_session(:current_pet_id, pet.id)
-    |> assign(:page_title, "Perfil Clínico de tu Mascota")
-    |> render("clinical_profile.html", assigns)
+      conn
+      |> put_session(:current_pet_id, pet.id)
+      |> assign(:page_title, "Perfil Clínico de tu Mascota")
+      |> render("clinical_profile.html", assigns)
+    else
+      redirect_to_index(conn)
+    end
   end
 
   def update_clinical_profile(conn, %{"id" => id, "pet" => pet_params}) do
@@ -228,5 +240,11 @@ defmodule SafePet24Web.PetController do
       vaccine_changeset: vaccine_changeset,
       medication_changeset: medication_changeset
     ]
+  end
+
+  defp redirect_to_index(conn) do
+    conn
+    |> put_flash(:info, "No tienes permisos sobre esta mascota.")
+    |> redirect(to: Routes.pet_path(conn, :index))
   end
 end

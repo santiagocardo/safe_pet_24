@@ -5,7 +5,7 @@ defmodule SafePet24Web.ContactController do
   alias SafePet24.Contacts.Contact
 
   def index(conn, _params) do
-    contacts = Contacts.list_contacts()
+    contacts = Contacts.list_contacts(conn.assigns.current_user.id)
 
     conn
     |> assign(:page_title, "Tus Contactos")
@@ -36,16 +36,26 @@ defmodule SafePet24Web.ContactController do
 
   def show(conn, %{"id" => id}) do
     contact = Contacts.get_contact!(id)
-    render(conn, "show.html", contact: contact)
+
+    if contact.user_id == conn.assigns.current_user.id do
+      render(conn, "show.html", contact: contact)
+    else
+      redirect_to_index(conn)
+    end
   end
 
   def edit(conn, %{"id" => id}) do
     contact = Contacts.get_contact!(id)
-    changeset = Contacts.change_contact(contact)
 
-    conn
-    |> assign(:page_title, "Editar Contacto")
-    |> render("edit.html", contact: contact, changeset: changeset)
+    if contact.user_id == conn.assigns.current_user.id do
+      changeset = Contacts.change_contact(contact)
+
+      conn
+      |> assign(:page_title, "Editar Contacto")
+      |> render("edit.html", contact: contact, changeset: changeset)
+    else
+      redirect_to_index(conn)
+    end
   end
 
   def update(conn, %{"id" => id, "contact" => contact_params}) do
@@ -68,6 +78,12 @@ defmodule SafePet24Web.ContactController do
 
     conn
     |> put_flash(:info, "Contacto eliminado exitosamente.")
+    |> redirect(to: Routes.contact_path(conn, :index))
+  end
+
+  defp redirect_to_index(conn) do
+    conn
+    |> put_flash(:info, "No tienes permisos sobre este contacto.")
     |> redirect(to: Routes.contact_path(conn, :index))
   end
 end

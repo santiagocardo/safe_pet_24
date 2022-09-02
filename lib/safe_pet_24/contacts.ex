@@ -9,16 +9,16 @@ defmodule SafePet24.Contacts do
   alias SafePet24.Contacts.Contact
 
   @doc """
-  Returns the list of contacts.
+  Returns the list of contacts by user_id.
 
   ## Examples
 
-      iex> list_contacts()
+      iex> list_contacts(user_id)
       [%Contact{}, ...]
 
   """
-  def list_contacts do
-    Repo.all(Contact)
+  def list_contacts(user_id) do
+    from(c in Contact, where: c.user_id == ^user_id) |> Repo.all()
   end
 
   @doc """

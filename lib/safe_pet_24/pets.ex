@@ -12,16 +12,16 @@ defmodule SafePet24.Pets do
   alias SafePet24.Pets.Medication
 
   @doc """
-  Returns the list of pets.
+  Returns the list of pets by user_id.
 
   ## Examples
 
-      iex> list_pets()
+      iex> list_pets(user_id)
       [%Pet{}, ...]
 
   """
-  def list_pets do
-    Repo.all(Pet)
+  def list_pets(user_id) do
+    from(p in Pet, where: p.user_id == ^user_id) |> Repo.all()
   end
 
   @doc """

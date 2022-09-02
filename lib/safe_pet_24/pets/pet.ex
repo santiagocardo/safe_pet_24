@@ -46,5 +46,10 @@ defmodule SafePet24.Pets.Pet do
     |> validate_length(:serial, min: 6, max: 24)
     |> unsafe_validate_unique(:serial, SafePet24.Repo)
     |> unique_constraint(:serial)
+    |> validate_change(:serial, fn :serial, serial ->
+      serials = SafePet24.SerialsCache.get()
+
+      if serial in serials, do: [], else: [serial: "serial no válido"]
+    end)
   end
 end

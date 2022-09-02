@@ -9,6 +9,7 @@ defmodule SafePet24.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
+      xref: [exclude: [:httpc]],
       aliases: aliases(),
       deps: deps()
     ]

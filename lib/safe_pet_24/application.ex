@@ -8,6 +8,7 @@ defmodule SafePet24.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      SafePet24.SerialsCache,
       # Start the Ecto repository
       SafePet24.Repo,
       # Start the Telemetry supervisor

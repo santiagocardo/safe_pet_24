@@ -22,10 +22,7 @@
           >
             <i class="fas fa-bars"></i>
           </button>
-          <%# <%= live_patch "ADMINISTRACIÓN",
-            to: Routes.vehicle_index_path(@conn, :new),
-            class: "md:block text-left md:pb-2 text-gray-800 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-          %>
+          <%= link "SAFEPET24", to: Routes.pet_path(@conn, :index), class: "md:block text-left md:pb-2 text-gray-800 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0" %>
           <div class="md:hidden items-center flex">
             <span class="w-12 h-12 text-sm text-white bg-gray-200 inline-flex items-center justify-center rounded-full">
               <img
@@ -42,10 +39,7 @@
             <div class="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-gray-200">
               <div class="flex flex-wrap">
                 <div class="w-6/12">
-                  <%# <%= live_patch "ADMINISTRACIÓN",
-                    to: Routes.vehicle_index_path(@conn, :new),
-                    class: "md:block text-left md:pb-2 text-gray-800 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                  %>
+                  <%= link "SAFEPET24", to: Routes.pet_path(@conn, :index), class: "md:block text-left md:pb-2 text-gray-800 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0" %>
                 </div>
                 <div class="w-6/12 flex justify-end">
                   <button
@@ -151,57 +145,55 @@
       <div class="relative md:ml-64 bg-gray-50">
         <nav class="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
           <div class="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
-            <span class="text-white text-lg uppercase hidden lg:inline-block font-semibold">
+            <span class="text-slate-700 text-lg uppercase hidden lg:inline-block font-semibold">
               SafePet24
             </span>
             <div class="items-center hidden md:flex">
-              <img alt="banner" class="ml-auto w-2/12 align-middle border-none shadow-xs" src={Routes.static_path(@conn, "/images/banner.png")} />
+              <img alt="banner" class="ml-auto w-3/12 align-middle border-none shadow-xs" src={Routes.static_path(@conn, "/images/banner.png")} />
             </div>
           </div>
         </nav>
         <!-- Header -->
-        <header class="relative bg-teal-500 md:pt-32 pb-32 pt-12">
+        <header class="relative bg-slate-300 md:pt-32 pb-32 pt-12">
           <div class="px-4 md:px-10 mx-auto w-full">
-            <div>
-              <!-- Card stats -->
-              <div class="flex flex-wrap">
-                <div class="w-full md:w-6/12 px-4">
-                  <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
-                    <div class="flex-auto p-4">
-                      <div class="flex flex-wrap">
-                        <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                          <h5 class="text-gray-400 uppercase font-bold text-xs">
-                            Mascotas Registradas
-                          </h5>
-                          <span class="font-semibold text-xl text-gray-700">
-                            <%= total_pets() %>
-                          </span>
-                        </div>
-                        <div class="relative w-auto pl-4 flex-initial">
-                          <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-gray-500">
-                            <i class="fas fa-dog"></i>
-                          </div>
+            <!-- Card stats -->
+            <div class="hidden md:flex flex-wrap">
+              <div class="w-full md:w-6/12 px-4">
+                <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+                  <div class="flex-auto p-4">
+                    <div class="flex flex-wrap">
+                      <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
+                        <h5 class="text-gray-400 uppercase font-bold text-xs">
+                          Mascotas Registradas
+                        </h5>
+                        <span class="font-semibold text-xl text-gray-700">
+                          <%= total_pets() %>
+                        </span>
+                      </div>
+                      <div class="relative w-auto pl-4 flex-initial">
+                        <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-gray-500">
+                          <i class="fas fa-dog"></i>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="w-full md:w-6/12 px-4">
-                  <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
-                    <div class="flex-auto p-4">
-                      <div class="flex flex-wrap">
-                        <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                          <h5 class="text-gray-400 uppercase font-bold text-xs">
-                            Contactos Registrados
-                          </h5>
-                          <span class="font-semibold text-xl text-gray-700">
-                            <%= total_contacts() %>
-                          </span>
-                        </div>
-                        <div class="relative w-auto pl-4 flex-initial">
-                          <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-yellow-500">
-                            <i class="fas fa-user"></i>
-                          </div>
+              </div>
+              <div class="w-full md:w-6/12 px-4">
+                <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+                  <div class="flex-auto p-4">
+                    <div class="flex flex-wrap">
+                      <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
+                        <h5 class="text-gray-400 uppercase font-bold text-xs">
+                          Contactos Registrados
+                        </h5>
+                        <span class="font-semibold text-xl text-gray-700">
+                          <%= total_contacts() %>
+                        </span>
+                      </div>
+                      <div class="relative w-auto pl-4 flex-initial">
+                        <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-yellow-500">
+                          <i class="fas fa-user"></i>
                         </div>
                       </div>
                     </div>
@@ -212,7 +204,7 @@
           </div>
         </header>
         <!-- Content -->
-        <div class="px-4 md:px-10 mx-auto w-full -m-24">
+        <div class="px-4 md:px-10 mx-auto w-full -m-32">
           <section class="flex flex-wrap">
             <div class="w-full px-4">
               <div id="content" class="relative flex flex-col min-w-0 break-words w-full my-6 shadow-lg rounded-lg bg-gray-100 border-0">

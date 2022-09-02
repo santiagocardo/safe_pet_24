@@ -7,7 +7,7 @@
 
   <div class="bg-white rounded-t p-6">
     <div class="flex flex-wrap justify-between items-center">
-      <h6 class="text-center text-gray-600 text-xl">
+      <h6 class="w-full sm:w-auto text-center text-gray-600 text-xl">
         <%= if @conn.private.phoenix_action == :edit do %>
           Actualizar datos de <span class="text-gray-700 font-bold"><%= @pet.name %></span>
         <% else %>
@@ -16,7 +16,7 @@
       </h6>
       <%= submit "Guardar",
         phx_disable_with: "Guardando...",
-        class: "my-2 sm:my-0 text-center w-full sm:w-auto bg-blue-500 text-white hover:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+        class: "my-2 sm:my-0 px-4 py-2 text-center w-full sm:w-auto bg-cyan-500 text-white hover:bg-cyan-600 font-bold uppercase text-xs rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
       %>
     </div>
   </div>
@@ -116,7 +116,7 @@
     <div class="pt-8">
       <%= link "◀︎ Volver",
         to: Routes.pet_path(@conn, :index),
-        class: "bg-blue-500 text-white hover:bg-blue-600 font-bold uppercase text-xs m-4 px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+        class: "bg-cyan-500 text-white hover:bg-cyan-600 font-bold uppercase text-xs m-4 px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
       %>
     </div>
   </div>

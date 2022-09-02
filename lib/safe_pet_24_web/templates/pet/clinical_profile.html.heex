@@ -1,5 +1,5 @@
 <div class="rounded-t bg-white p-6">
-  <div class="flex justify-between">
+  <div class="flex justify-center">
     <h6 class="text-center text-gray-600 text-xl">
       Perfil Clínico de <span class="text-gray-700 font-bold"><%= @pet.name %></span>
     </h6>
@@ -16,6 +16,6 @@
 <div class="px-4 lg:px-10 pt-0 pb-10">
   <%= link "◀︎ Volver",
     to: Routes.pet_path(@conn, :index),
-    class: "bg-blue-500 text-white hover:bg-blue-600 font-bold uppercase text-xs m-4 px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+    class: "bg-cyan-500 text-white hover:bg-cyan-600 font-bold uppercase text-xs m-4 px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
   %>
 </div>

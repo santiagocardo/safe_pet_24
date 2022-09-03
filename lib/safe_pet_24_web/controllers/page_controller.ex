@@ -7,7 +7,9 @@ defmodule SafePet24Web.PageController do
     if pet = SafePet24.Pets.get_pet_by_serial(serial) do
       contacts = SafePet24.Contacts.list_contacts(pet.user_id)
 
-      render(conn, "index.html", pet: pet, contacts: contacts)
+      conn
+      |> assign(:page_title, "Información de la Mascota")
+      |> render("index.html", pet: pet, contacts: contacts)
     else
       conn
       |> put_flash(:error, "Mascota no registrada")

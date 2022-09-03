@@ -40,6 +40,12 @@ defmodule SafePet24.Pets do
   """
   def get_pet!(id), do: Repo.get!(Pet, id) |> Repo.preload([:diseases, :vaccines, :medications])
 
+  def get_pet_by_serial(serial),
+    do:
+      Pet
+      |> Repo.get_by(serial: serial)
+      |> Repo.preload([:diseases, :vaccines, :medications])
+
   @doc """
   Creates a pet.
 

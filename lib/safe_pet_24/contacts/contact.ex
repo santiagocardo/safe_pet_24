@@ -19,6 +19,7 @@ defmodule SafePet24.Contacts.Contact do
     |> cast(attrs, [:name, :phone, :email, :address, :user_id])
     |> validate_required([:name, :phone, :email, :address, :user_id])
     |> validate_length(:name, min: 4, max: 24)
+    |> validate_length(:phone, is: 10)
     |> validate_email()
   end
 

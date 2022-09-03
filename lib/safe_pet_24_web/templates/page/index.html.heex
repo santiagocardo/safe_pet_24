@@ -1,41 +1,221 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>Peace of mind from prototype to production</p>
-</section>
+<div class="rounded-t bg-white p-6">
+  <div class="flex justify-center">
+    <h6 class="text-center text-gray-600 text-xl">
+      Información de <span class="text-gray-700 font-bold"><%= @pet.name %></span>
+    </h6>
+  </div>
+</div>
 
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.6/CHANGELOG.md">v1.6 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://web.libera.chat/#elixir">#elixir on Libera Chat (IRC)</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-      <li>
-        <a href="https://elixir-slackin.herokuapp.com/">Elixir on Slack</a>
-      </li>
-      <li>
-        <a href="https://discord.gg/elixir">Elixir on Discord</a>
-      </li>
-    </ul>
-  </article>
-</section>
+<div class="flex-auto px-4 lg:px-10 pb-10 bg-gray-100 shadow-lg">
+  <h6 class="text-gray-400 text-sm py-6 font-bold uppercase">
+    Información de tu Mascota
+  </h6>
+  <div class="flex flex-wrap">
+    <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+      <span class="uppercase text-gray-600 text-xs font-bold mb-2">Especie:</span>
+      <p class="capitalize inline-block text-sm"><%= @pet.species %></p>
+    </div>
+    <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+      <span class="uppercase text-gray-600 text-xs font-bold mb-2">Raza:</span>
+      <p class="inline-block text-sm"><%= @pet.breed %></p>
+    </div>
+    <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+      <span class="uppercase text-gray-600 text-xs font-bold mb-2">Fecha de Nacimiento:</span>
+      <p class="inline-block text-sm"><%= @pet.birthdate %></p>
+    </div>
+    <%= if @pet.color do %>
+      <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+        <span class="uppercase text-gray-600 text-xs font-bold mb-2">Color:</span>
+        <p class="inline-block text-sm"><%= @pet.color %></p>
+      </div>
+    <% end %>
+    <%= if @pet.weight do %>
+      <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+        <span class="uppercase text-gray-600 text-xs font-bold mb-2">Peso:</span>
+        <p class="inline-block text-sm"><%= @pet.weight %> Kg</p>
+      </div>
+    <% end %>
+    <%= if @pet.reproductive_status do %>
+      <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+        <span class="uppercase text-gray-600 text-xs font-bold mb-2">Estado Reproductivo:</span>
+        <p class="inline-block text-sm"><%= @pet.reproductive_status %></p>
+      </div>
+    <% end %>
+    <%= if @pet.food_type do %>
+      <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+        <span class="uppercase text-gray-600 text-xs font-bold mb-2">Tipo de Alimento:</span>
+        <p class="inline-block text-sm"><%= @pet.food_type %></p>
+      </div>
+    <% end %>
+    <%= if @pet.food_brand do %>
+      <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+        <span class="uppercase text-gray-600 text-xs font-bold mb-2">Marca de Alimento:</span>
+        <p class="inline-block text-sm"><%= @pet.food_brand %></p>
+      </div>
+    <% end %>
+    <%= if @pet.consumption_frequency do %>
+      <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+        <span class="uppercase text-gray-600 text-xs font-bold mb-2">Frecuencia de Consumo:</span>
+        <p class="inline-block text-sm"><%= @pet.consumption_frequency %></p>
+      </div>
+    <% end %>
+    <%= if @pet.reward do %>
+      <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
+        <span class="uppercase text-gray-600 text-xs font-bold mb-2">Recompensa:</span>
+        <p class="inline-block text-sm">
+          <%= @pet.reward %>
+          <i class="fas fa-dollar-sign text-lime-700"></i>
+        </p>
+      </div>
+    <% end %>
+  </div>
+
+  <hr class="mt-6 border-b-1 border-gray-300" />
+
+  <h6 class="text-gray-400 text-sm mt-10 mb-6 font-bold uppercase">
+    Contactos
+  </h6>
+
+  <div class="block w-full overflow-x-auto">
+    <!-- table -->
+    <table class="items-center w-full bg-transparent border-collapse">
+      <thead>
+        <tr class="align-middle text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+          <th class="p-3">Nombre</th>
+          <th class="p-3">WhatsApp</th>
+          <th class="p-3">Teléfono</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for contact <- @contacts do %>
+          <tr class="align-middle text-sm text-left whitespace-nowrap">
+            <th class="p-3 border border-solid border-l-0 border-r-0">
+              <span class="capitalize font-bold text-gray-600"><%= contact.name %></span>
+            </th>
+            <td class="p-3 border border-solid border-l-0 border-r-0">
+              <button onclick={"sendWhatsAppMessage(event, '#{@pet.name}', '#{contact.phone}')"} class="text-white bg-slate-500 hover:bg-slate-700 font-bold text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150">
+                <i class="fas fa-comments text-white"></i>
+                Enviar Mensaje
+              </button>
+            </td>
+            <td class="p-3 border border-solid border-l-0 border-r-0">
+              <a href={"tel:#{contact.phone}"} target="_blank" class="underline hover:text-gray-900"><%= contact.phone %></a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= if Enum.any?(@pet.diseases) or Enum.any?(@pet.vaccines) or Enum.any?(@pet.medications) do %>
+    <%= if Enum.any?(@pet.diseases) do %>
+
+      <h6 class="text-gray-400 text-sm mt-10 mb-6 font-bold uppercase">
+        Enfermedades
+      </h6>
+
+      <div class="block w-full overflow-x-auto">
+        <!-- table -->
+        <table class="items-center w-full bg-transparent border-collapse">
+          <thead>
+            <tr class="align-middle text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+              <th class="p-3">
+                Enfermedad
+              </th>
+              <th class="p-3">
+                Cuidados
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= for disease <- @pet.diseases do %>
+              <tr class="align-middle text-sm text-left whitespace-nowrap">
+                <th class="p-3 border border-solid border-l-0 border-r-1">
+                  <span class="capitalize font-bold text-gray-600"><%= disease.name %></span>
+                </th>
+                <td class="p-3 border border-solid border-l-0 border-r-0">
+                  <%= disease.care || "-" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+
+    <%= if Enum.any?(@pet.vaccines) do %>
+      <h6 class="text-gray-400 text-sm mt-10 mb-6 font-bold uppercase">
+        Vacunas
+      </h6>
+
+      <div class="block w-full overflow-x-auto">
+        <!-- table -->
+        <table class="items-center w-full bg-transparent border-collapse">
+          <thead>
+            <tr class="align-middle text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+              <th class="p-3">
+                Vacuna
+              </th>
+              <th class="p-3">
+                Fecha
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= for vaccine <- @pet.vaccines do %>
+              <tr class="align-middle text-sm text-left whitespace-nowrap">
+                <th class="p-3 border border-solid border-l-0 border-r-1">
+                  <span class="capitalize font-bold text-gray-600"><%= vaccine.name %></span>
+                </th>
+                <td class="p-3 border border-solid border-l-0 border-r-0">
+                  <%= vaccine.date %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+
+    <%= if Enum.any?(@pet.medications) do %>
+      <h6 class="text-gray-400 text-sm mt-10 mb-6 font-bold uppercase">
+        Medicamentos
+      </h6>
+
+      <div class="block w-full overflow-x-auto">
+        <!-- table -->
+        <table class="items-center w-full bg-transparent border-collapse">
+          <thead>
+            <tr class="align-middle text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+              <th class="p-3">
+                Medicamento
+              </th>
+              <th class="p-3">
+                Dosis
+              </th>
+              <th class="p-3">
+                Frecuencia
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= for medication <- @pet.medications do %>
+              <tr class="align-middle text-sm text-left whitespace-nowrap">
+                <th class="p-3 border border-solid border-l-0 border-r-1">
+                  <span class="capitalize font-bold text-gray-600"><%= medication.name %></span>
+                </th>
+                <td class="p-3 border border-solid border-l-0 border-r-1">
+                  <%= medication.dosage %>
+                </td>
+                <td class="p-3 border border-solid border-l-0 border-r-0">
+                  <%= medication.frequency %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+
+  <% end %>
+</div>

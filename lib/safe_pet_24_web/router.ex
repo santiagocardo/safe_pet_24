@@ -89,6 +89,7 @@ defmodule SafePet24Web.Router do
   scope "/", SafePet24Web do
     pipe_through [:browser]
 
+    get "/pets/info/:serial", PageController, :index
     delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create

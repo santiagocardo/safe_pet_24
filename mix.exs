@@ -9,7 +9,6 @@ defmodule SafePet24.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
-      xref: [exclude: [:httpc]],
       aliases: aliases(),
       deps: deps()
     ]
@@ -21,7 +20,7 @@ defmodule SafePet24.MixProject do
   def application do
     [
       mod: {SafePet24.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :inets]
     ]
   end
 

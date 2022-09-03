@@ -24,10 +24,10 @@ defmodule SafePet24Web.ContactController do
     contact_params = Map.put(contact_params, "user_id", conn.assigns.current_user.id)
 
     case Contacts.create_contact(contact_params) do
-      {:ok, contact} ->
+      {:ok, _contact} ->
         conn
         |> put_flash(:info, "Contacto creado exitosamente.")
-        |> redirect(to: Routes.contact_path(conn, :show, contact))
+        |> redirect(to: Routes.contact_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

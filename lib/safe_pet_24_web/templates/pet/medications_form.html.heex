@@ -19,41 +19,41 @@
         <table class="items-center w-full bg-transparent border-collapse">
           <thead>
             <tr class="bg-gray-50 text-gray-500 align-middle text-xs uppercase whitespace-nowrap font-semibold text-left">
-              <th class="pr-16 py-2">
+              <th class="pl-2 pr-16 py-2">
                 Medicamento
               </th>
-              <th class="pr-12 py-2">
+              <th class="pl-2 pr-12 py-2">
                 Dosis
               </th>
-              <th class="pr-2 py-2">
+              <th class="p-2">
                 Frecuencia
               </th>
-              <th class="pr-2 py-2"></th>
-              <th class="pr-2 py-2"></th>
+              <th class="p-2"></th>
+              <th class="p-2"></th>
             </tr>
           </thead>
           <tbody id="medications">
             <%= for medication <- inputs_for(f, :medications) do %>
               <tr class="align-middle border border-solid border-l-0 border-r-0 text-sm whitespace-nowrap">
-                <td class="pr-2 py-2">
+                <td class="p-2">
                   <%= text_input medication, :name, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
                   <%= error_tag medication, :name %>
                 </td>
-                <td class="pr-2 py-2">
+                <td class="p-2">
                   <%= text_input medication, :dosage, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
                   <%= error_tag medication, :dosage %>
                 </td>
-                <td class="pr-2 py-2">
+                <td class="p-2">
                   <%= text_input medication, :frequency, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
                   <%= error_tag medication, :frequency %>
                 </td>
-                <td class="pr-2 py-2">
+                <td class="p-2">
                   <%= link to: Routes.pet_path(@conn, :delete_medication, %{"id" => medication.data.id}), method: :delete, data: [confirm: "Estás seguro/a?"], class: "py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700" do %>
                     <i class="fas fa-trash mr-2 text-sm text-gray-500"></i>
                     Eliminar
                   <% end %>
                 </td>
-                <td class="pr-2 py-2">
+                <td class="p-2">
                   <%= submit phx_disable_with: "Actualizando...", class: "py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700" do %>
                     <i class="fas fa-save mr-2 text-sm text-gray-500"></i>
                     Actualizar

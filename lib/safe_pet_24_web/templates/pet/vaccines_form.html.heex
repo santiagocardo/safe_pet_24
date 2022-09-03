@@ -19,34 +19,34 @@
         <table class="items-center w-full bg-transparent border-collapse">
           <thead>
             <tr class="bg-gray-50 text-gray-500 align-middle text-xs uppercase whitespace-nowrap font-semibold text-left">
-              <th class="pr-20 py-2">
+              <th class="pl-2 pr-20 py-2">
                 Vacuna
               </th>
-              <th class="pr-2 py-2">
+              <th class="p-2">
                 Fecha
               </th>
-              <th class="pr-2 py-2"></th>
-              <th class="pr-2 py-2"></th>
+              <th class="p-2"></th>
+              <th class="p-2"></th>
             </tr>
           </thead>
           <tbody id="vaccines">
             <%= for vaccine <- inputs_for(f, :vaccines) do %>
               <tr class="align-middle border border-solid border-l-0 border-r-0 text-sm whitespace-nowrap">
-                <td class="pr-2 py-2">
+                <td class="p-2">
                   <%= text_input vaccine, :name, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
                   <%= error_tag vaccine, :name %>
                 </td>
-                <td class="pr-2 py-2">
+                <td class="p-2">
                   <%= date_input vaccine, :date, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
                   <%= error_tag vaccine, :date %>
                 </td>
-                <td class="pr-2 py-2">
+                <td class="p-2">
                   <%= link to: Routes.pet_path(@conn, :delete_vaccine, %{"id" => vaccine.data.id}), method: :delete, data: [confirm: "Estás seguro/a?"], class: "py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700" do %>
                     <i class="fas fa-trash mr-2 text-sm text-gray-500"></i>
                     Eliminar
                   <% end %>
                 </td>
-                <td class="pr-2 py-2">
+                <td class="p-2">
                   <%= submit phx_disable_with: "Actualizando...", class: "py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700" do %>
                     <i class="fas fa-save mr-2 text-sm text-gray-500"></i>
                     Actualizar

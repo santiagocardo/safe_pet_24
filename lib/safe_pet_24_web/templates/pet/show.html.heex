@@ -32,7 +32,7 @@
     <%= if @pet.weight do %>
       <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
         <span class="uppercase text-gray-600 text-xs font-bold mb-2">Peso:</span>
-        <p class="inline-block text-sm"><%= @pet.weight %></p>
+        <p class="inline-block text-sm"><%= @pet.weight %> Kg</p>
       </div>
     <% end %>
     <%= if @pet.reproductive_status do %>
@@ -99,7 +99,7 @@
                   <span class="capitalize font-bold text-gray-600"><%= disease.name %></span>
                 </th>
                 <td class="p-3 border border-solid border-l-0 border-r-0">
-                  <%= disease.care %>
+                  <%= disease.care || "-" %>
                 </td>
               </tr>
             <% end %>

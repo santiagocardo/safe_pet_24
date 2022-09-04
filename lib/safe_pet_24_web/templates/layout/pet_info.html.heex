@@ -31,7 +31,7 @@
     <main>
       <section class="relative w-full h-full py-20 min-h-screen">
         <div class="absolute top-0 w-full h-full bg-gray-800 bg-full bg-no-repeat"></div>
-        <div class="container mx-auto px-4 h-full">
+        <div class="container mx-auto px-2 h-full">
           <div class="flex content-center items-center justify-center h-full">
             <div class="w-full lg:w-8/12 px-4">
               <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-200 border-0">
@@ -68,14 +68,15 @@
     </main>
   </body>
   <script type="text/javascript">
-    var locationLink = ""
+    var locationMessage = ""
 
     window.navigator.geolocation.getCurrentPosition(function (position) {
-      locationLink = "http://maps.google.com/maps?q=" + position.coords.latitude + "," + position.coords.longitude
+      locationMessage = " La encontré en esta ubicación https://maps.google.com/maps?q=" + position.coords.latitude + "," + position.coords.longitude
     })
 
     function sendWhatsAppMessage(event, petName, phone) {
-      window.location.href = "https://wa.me/57" + phone + "?text=Hola! He encontrado a tu mascota " + petName + ". La encontré en esta ubicación " + locationLink
+      var url = "https://wa.me/57" + phone + "?text=Hola! He encontrado a tu mascota " + petName + "." + locationMessage
+      window.open(url, '_blank').focus()
     }
   </script>
 </html>

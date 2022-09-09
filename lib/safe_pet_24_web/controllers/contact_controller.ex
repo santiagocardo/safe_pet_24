@@ -13,11 +13,17 @@ defmodule SafePet24Web.ContactController do
   end
 
   def new(conn, _params) do
-    changeset = Contacts.change_contact(%Contact{})
+    if Contacts.total_contacts(conn.assigns.current_user.id) < 6 do
+      changeset = Contacts.change_contact(%Contact{})
 
-    conn
-    |> assign(:page_title, "Registrar Contacto")
-    |> render("new.html", changeset: changeset)
+      conn
+      |> assign(:page_title, "Registrar Contacto")
+      |> render("new.html", changeset: changeset)
+    else
+      conn
+      |> put_flash(:warning, "Solo puedes tener 5 contactos como máximo")
+      |> redirect(to: Routes.contact_path(conn, :index))
+    end
   end
 
   def create(conn, %{"contact" => contact_params}) do

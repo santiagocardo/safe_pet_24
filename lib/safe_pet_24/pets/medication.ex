@@ -17,6 +17,8 @@ defmodule SafePet24.Pets.Medication do
     medication
     |> cast(attrs, [:name, :dosage, :frequency, :pet_id])
     |> validate_required([:name, :dosage, :frequency])
-    |> validate_length(:name, min: 4, max: 24)
+    |> validate_length(:name, min: 4, max: 35)
+    |> validate_length(:dosage, min: 4, max: 30)
+    |> validate_length(:frequency, min: 4, max: 30)
   end
 end

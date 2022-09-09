@@ -16,6 +16,6 @@ defmodule SafePet24.Pets.Vaccine do
     vaccine
     |> cast(attrs, [:name, :date, :pet_id])
     |> validate_required([:name, :date])
-    |> validate_length(:name, min: 4, max: 24)
+    |> validate_length(:name, min: 4, max: 35)
   end
 end

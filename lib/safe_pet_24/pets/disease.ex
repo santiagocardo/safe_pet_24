@@ -16,6 +16,7 @@ defmodule SafePet24.Pets.Disease do
     diseases
     |> cast(attrs, [:name, :care, :pet_id])
     |> validate_required([:name])
-    |> validate_length(:name, min: 4, max: 24)
+    |> validate_length(:name, min: 4, max: 35)
+    |> validate_length(:care, min: 4, max: 150)
   end
 end

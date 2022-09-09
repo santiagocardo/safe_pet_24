@@ -47,8 +47,8 @@ defmodule SafePet24.Accounts.User do
       message: "debe tener el signo @ y sin espacios"
     )
     |> validate_length(:email, max: 160)
-    |> unsafe_validate_unique(:email, SafePet24.Repo)
-    |> unique_constraint(:email)
+    |> unsafe_validate_unique(:email, SafePet24.Repo, message: "ya está en uso")
+    |> unique_constraint(:email, message: "ya está en uso")
   end
 
   defp validate_password(changeset, opts) do
@@ -67,8 +67,8 @@ defmodule SafePet24.Accounts.User do
     changeset
     |> validate_required([:serial])
     |> validate_length(:serial, min: 6, max: 24)
-    |> unsafe_validate_unique(:serial, SafePet24.Repo)
-    |> unique_constraint(:serial)
+    |> unsafe_validate_unique(:serial, SafePet24.Repo, message: "ya está en uso")
+    |> unique_constraint(:serial, message: "ya está en uso")
     |> validate_change(:serial, fn :serial, serial ->
       serials = SafePet24.SerialsCache.get()
 

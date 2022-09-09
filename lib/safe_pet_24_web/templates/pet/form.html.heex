@@ -80,7 +80,7 @@
       <div class="w-full lg:w-4/12 px-4">
         <div class="relative w-full mb-3">
           <%= label f, "Estado reroductivo", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
-          <%= text_input f, :reproductive_status, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= select f, :reproductive_status, ["Entero": "Entero", "Castrado": "Castrado", "Esterilizado": "Esterilizado", "Lactancia": "Lactancia", "Gestación": "Gestación"], class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
           <%= error_tag f, :reproductive_status %>
         </div>
       </div>
@@ -94,7 +94,7 @@
       <div class="w-full lg:w-4/12 px-4">
         <div class="relative w-full mb-3">
           <%= label f, "Frecuencia de consumo", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
-          <%= text_input f, :consumption_frequency, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= text_input f, :consumption_frequency, placeholder: "2 veces por día", class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
           <%= error_tag f, :consumption_frequency %>
         </div>
       </div>

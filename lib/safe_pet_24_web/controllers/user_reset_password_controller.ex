@@ -25,7 +25,7 @@ defmodule SafePet24Web.UserResetPasswordController do
       :info,
       "Si su correo electrónico está en nuestro sistema, recibirá instrucciones para restablecer su contraseña en breve."
     )
-    |> redirect(to: "/")
+    |> redirect(to: Routes.user_session_path(conn, :new))
   end
 
   def edit(conn, _params) do
@@ -38,7 +38,7 @@ defmodule SafePet24Web.UserResetPasswordController do
     case Accounts.reset_user_password(conn.assigns.user, user_params) do
       {:ok, _} ->
         conn
-        |> put_flash(:info, "Password reset successfully.")
+        |> put_flash(:info, "La contraseña ha sido restablecida con éxito.")
         |> redirect(to: Routes.user_session_path(conn, :new))
 
       {:error, changeset} ->
@@ -53,8 +53,8 @@ defmodule SafePet24Web.UserResetPasswordController do
       conn |> assign(:user, user) |> assign(:token, token)
     else
       conn
-      |> put_flash(:error, "Reset password link is invalid or it has expired.")
-      |> redirect(to: "/")
+      |> put_flash(:error, "El enlace para restablecer la contraseña no es válido o ha caducado.")
+      |> redirect(to: Routes.user_session_path(conn, :new))
       |> halt()
     end
   end

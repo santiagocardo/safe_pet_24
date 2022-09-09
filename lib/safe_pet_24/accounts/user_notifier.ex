@@ -21,7 +21,7 @@ defmodule SafePet24.Accounts.UserNotifier do
   Deliver instructions to confirm account.
   """
   def deliver_confirmation_instructions(user, url) do
-    deliver(user.email, "Instrucciones de confirmación", """
+    deliver(user.email, "Instrucciones de confirmación de cuenta", """
 
     ==============================
 
@@ -41,7 +41,7 @@ defmodule SafePet24.Accounts.UserNotifier do
   Deliver instructions to reset a user password.
   """
   def deliver_reset_password_instructions(user, url) do
-    deliver(user.email, "Reset password instructions", """
+    deliver(user.email, "Instrucciones para restablecer la contraseña", """
 
     ==============================
 
@@ -61,7 +61,7 @@ defmodule SafePet24.Accounts.UserNotifier do
   Deliver instructions to update a user email.
   """
   def deliver_update_email_instructions(user, url) do
-    deliver(user.email, "Update email instructions", """
+    deliver(user.email, "Instrucciones para actualizar el correo electrónico", """
 
     ==============================
 

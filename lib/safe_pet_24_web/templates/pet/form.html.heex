@@ -8,7 +8,7 @@
   <div class="bg-white rounded-t p-6">
     <div class="flex flex-wrap justify-between items-center">
       <h6 class="w-full sm:w-auto text-center text-gray-600 text-xl">
-        <%= if @conn.private.phoenix_action == :edit do %>
+        <%= if @conn.private.phoenix_action in [:edit, :update] do %>
           Actualizar datos de <span class="text-gray-700 font-bold"><%= @pet.name %></span>
         <% else %>
           Registra tu Mascota
@@ -26,7 +26,7 @@
       Información de tu Mascota
     </h6>
     <div class="flex flex-wrap">
-      <%= unless @conn.private.phoenix_action == :edit do %>
+      <%= unless @conn.private.phoenix_action in [:edit, :update] do %>
         <div class="w-full lg:w-4/12 px-4">
           <div class="relative w-full mb-3">
             <%= label f, :serial, class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
@@ -113,7 +113,7 @@
         </div>
       </div>
     </div>
-    <%= if @conn.private.phoenix_action == :edit do %>
+    <%= if @conn.private.phoenix_action in [:edit, :update] do %>
       <div class="pt-8">
         <%= link "◀︎ Volver",
           to: Routes.pet_path(@conn, :index),

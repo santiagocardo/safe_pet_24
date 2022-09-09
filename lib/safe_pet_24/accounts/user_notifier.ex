@@ -8,7 +8,7 @@ defmodule SafePet24.Accounts.UserNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"SafePet24", "contact@example.com"})
+      |> from({"SafePet24", "info@safepet24.com"})
       |> subject(subject)
       |> text_body(body)
 
@@ -21,17 +21,17 @@ defmodule SafePet24.Accounts.UserNotifier do
   Deliver instructions to confirm account.
   """
   def deliver_confirmation_instructions(user, url) do
-    deliver(user.email, "Confirmation instructions", """
+    deliver(user.email, "Instrucciones de confirmación", """
 
     ==============================
 
-    Hi #{user.email},
+    Hola #{user.email},
 
-    You can confirm your account by visiting the URL below:
+    Puede confirmar su cuenta visitando la siguiente URL:
 
     #{url}
 
-    If you didn't create an account with us, please ignore this.
+    Si no has creado una cuenta con nosotros, ignora esto.
 
     ==============================
     """)
@@ -45,13 +45,13 @@ defmodule SafePet24.Accounts.UserNotifier do
 
     ==============================
 
-    Hi #{user.email},
+    Hola #{user.email},
 
-    You can reset your password by visiting the URL below:
+    Puede restablecer su contraseña visitando la siguiente URL:
 
     #{url}
 
-    If you didn't request this change, please ignore this.
+    Si no has solicitado este cambio, por favor ignora esto.
 
     ==============================
     """)
@@ -65,13 +65,13 @@ defmodule SafePet24.Accounts.UserNotifier do
 
     ==============================
 
-    Hi #{user.email},
+    Hola #{user.email},
 
-    You can change your email by visiting the URL below:
+    Puede cambiar su correo electrónico visitando la siguiente URL:
 
     #{url}
 
-    If you didn't request this change, please ignore this.
+    Si no has solicitado este cambio, por favor ignora esto.
 
     ==============================
     """)

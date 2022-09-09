@@ -80,4 +80,15 @@ if config_env() == :prod do
   #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+  config :safe_pet_24, SafePet24.Mailer,
+    adapter: Swoosh.Adapters.SMTP,
+    relay: "smtp.hostinger.com",
+    username: System.get_env("HOSTINGER_USERNAME"),
+    password: System.get_env("HOSTINGER_PASSWORD"),
+    ssl: true,
+    tls: :if_available,
+    auth: :if_available,
+    port: 465,
+    retries: 2,
+    no_mx_lookups: false
 end

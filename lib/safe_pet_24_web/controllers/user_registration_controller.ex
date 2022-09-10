@@ -4,7 +4,6 @@ defmodule SafePet24Web.UserRegistrationController do
   alias SafePet24.Accounts
   alias SafePet24.Accounts.User
   alias SafePet24.Contacts
-  alias SafePet24Web.UserAuth
 
   plug :put_root_layout, "session.html"
 

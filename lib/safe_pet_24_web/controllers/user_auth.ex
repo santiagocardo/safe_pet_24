@@ -134,7 +134,6 @@ defmodule SafePet24Web.UserAuth do
         conn
         |> put_flash(:error, "Debes confirmar tu cuenta para acceder a esta página.")
         |> redirect(to: Routes.user_confirmation_path(conn, :new))
-        |> halt()
 
       %User{} ->
         conn

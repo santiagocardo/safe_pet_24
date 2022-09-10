@@ -3,6 +3,7 @@ defmodule SafePet24Web.UserAuth do
   import Phoenix.Controller
 
   alias SafePet24.Accounts
+  alias SafePet24.Accounts.User
   alias SafePet24Web.Router.Helpers, as: Routes
 
   # Make the remember me cookie valid for 60 days.
@@ -128,14 +129,22 @@ defmodule SafePet24Web.UserAuth do
   they use the application at all, here would be a good place.
   """
   def require_authenticated_user(conn, _opts) do
-    if conn.assigns[:current_user] do
-      conn
-    else
-      conn
-      |> put_flash(:error, "Debes iniciar sesión para acceder a esta página.")
-      |> maybe_store_return_to()
-      |> redirect(to: Routes.user_session_path(conn, :new))
-      |> halt()
+    case conn.assigns[:current_user] do
+      %User{confirmed_at: nil} ->
+        conn
+        |> put_flash(:error, "Debes confirmar tu cuenta para acceder a esta página.")
+        |> redirect(to: Routes.user_confirmation_path(conn, :new))
+        |> halt()
+
+      %User{} ->
+        conn
+
+      nil ->
+        conn
+        |> put_flash(:error, "Debes iniciar sesión para acceder a esta página.")
+        |> maybe_store_return_to()
+        |> redirect(to: Routes.user_session_path(conn, :new))
+        |> halt()
     end
   end
 

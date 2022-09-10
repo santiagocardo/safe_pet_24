@@ -31,7 +31,7 @@ defmodule SafePet24Web.UserRegistrationController do
 
         conn
         |> put_flash(:info, "Usuario creado exitosamente.")
-        |> UserAuth.log_in_user(user)
+        |> redirect(to: Routes.user_session_path(conn, :new))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

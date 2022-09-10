@@ -30,7 +30,7 @@
         <div class="w-full lg:w-4/12 px-4">
           <div class="relative w-full mb-3">
             <%= label f, :serial, class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
-            <%= text_input f, :serial, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+            <%= text_input f, :serial, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
             <%= error_tag f, :serial %>
           </div>
         </div>
@@ -38,7 +38,7 @@
       <div class="w-full lg:w-4/12 px-4">
         <div class="relative w-full mb-3">
           <%= label f, "Nombre", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
-          <%= text_input f, :name, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= text_input f, :name, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
           <%= error_tag f, :name %>
         </div>
       </div>
@@ -52,7 +52,7 @@
       <div class="w-full lg:w-4/12 px-4">
         <div class="relative w-full mb-3">
           <%= label f, "Raza", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
-          <%= text_input f, :breed, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= text_input f, :breed, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
           <%= error_tag f, :breed %>
         </div>
       </div>
@@ -66,7 +66,7 @@
       <div class="w-full lg:w-4/12 px-4">
         <div class="relative w-full mb-3">
           <%= label f, "Fecha de nacimiento", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
-          <%= date_input f, :birthdate, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= date_input f, :birthdate, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
           <%= error_tag f, :birthdate %>
         </div>
       </div>
@@ -108,7 +108,7 @@
       <div class="w-full lg:w-4/12 px-4">
         <div class="relative w-full mb-3">
           <%= label f, "Recompensa", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
-          <%= number_input f, :reward, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= number_input f, :reward, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
           <%= error_tag f, :reward %>
         </div>
       </div>

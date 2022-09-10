@@ -45,7 +45,7 @@ defmodule SafePet24.Pets.Pet do
     |> cast_assoc(:diseases)
     |> cast_assoc(:vaccines)
     |> cast_assoc(:medications)
-    |> validate_required([:name, :birthdate, :species, :breed, :serial, :user_id])
+    |> validate_required([:name, :birthdate, :species, :breed, :serial, :reward, :user_id])
     |> validate_length(:name, min: 2, max: 50)
     |> validate_length(:serial, min: 6, max: 24)
     |> validate_length(:breed, min: 2, max: 30)

@@ -12,19 +12,19 @@
     <div class="flex flex-wrap items-center">
       <div class="w-full lg:w-3/12 px-4">
         <div class="relative w-full mb-3">
-          <%= text_input f, :name, placeholder: "Medicamento", class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= text_input f, :name, required: true, placeholder: "Medicamento", class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
           <%= error_tag f, :name %>
         </div>
       </div>
       <div class="w-full lg:w-3/12 px-4">
         <div class="relative w-full mb-3">
-          <%= text_input f, :dosage, placeholder: "Dosis", class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= text_input f, :dosage, required: true, placeholder: "Dosis", class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
           <%= error_tag f, :dosage %>
         </div>
       </div>
       <div class="w-full lg:w-3/12 px-4">
         <div class="relative w-full mb-3">
-          <%= text_input f, :frequency, placeholder: "2 veces por día", class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <%= text_input f, :frequency, required: true, placeholder: "2 veces por día", class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
           <%= error_tag f, :frequency %>
         </div>
       </div>

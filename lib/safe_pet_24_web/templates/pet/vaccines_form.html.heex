@@ -33,11 +33,11 @@
             <%= for vaccine <- inputs_for(f, :vaccines) do %>
               <tr class="align-middle border border-solid border-l-0 border-r-0 text-sm whitespace-nowrap">
                 <td class="p-2">
-                  <%= text_input vaccine, :name, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+                  <%= text_input vaccine, :name, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
                   <%= error_tag vaccine, :name %>
                 </td>
                 <td class="p-2">
-                  <%= date_input vaccine, :date, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+                  <%= date_input vaccine, :date, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
                   <%= error_tag vaccine, :date %>
                 </td>
                 <td class="p-2">

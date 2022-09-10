@@ -15,6 +15,9 @@
           Nombre
         </th>
         <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+          Serial
+        </th>
+        <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
           Especie
         </th>
         <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
@@ -31,6 +34,9 @@
               <span class="font-bold text-gray-600"><%= pet.name %></span>
             <% end %>
           </th>
+          <td class="px-6 py-2 align-middle border-t-0 border-l-0 border-r-0 text-sm whitespace-nowrap">
+            <%= pet.serial %>
+          </td>
           <td class="px-6 py-2 align-middle border-t-0 border-l-0 border-r-0 text-sm whitespace-nowrap">
             <%= pet.species %>
           </td>
@@ -59,7 +65,7 @@
                 class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
               %>
               <%= link "Eliminar",
-                to: Routes.pet_path(@conn, :delete, pet), method: :delete, data: [confirm: "Estás seguro/a?"],
+                to: Routes.pet_path(@conn, :delete, pet), method: :delete, data: [confirm: "Estás seguro/a? Cuando elimines tu mascota no podrás reactivar el código"],
                 class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
               %>
             </div>

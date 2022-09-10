@@ -31,7 +31,7 @@ defmodule SafePet24.Contacts.Contact do
       message: "debe tener el signo @ y sin espacios"
     )
     |> validate_length(:email, max: 80)
-    |> unsafe_validate_unique(:email, SafePet24.Repo)
-    |> unique_constraint(:email)
+    |> unsafe_validate_unique([:email, :user_id], SafePet24.Repo)
+    |> unique_constraint([:email, :user_id])
   end
 end

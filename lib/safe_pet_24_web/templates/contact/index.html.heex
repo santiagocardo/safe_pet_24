@@ -54,10 +54,12 @@
                 to: Routes.contact_path(@conn, :edit, contact),
                 class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
               %>
-              <%= link "Eliminar",
-                to: Routes.contact_path(@conn, :delete, contact), method: :delete, data: [confirm: "Estás seguro/a?"],
-                class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
-              %>
+              <%= if Enum.count(@contacts) > 1 do %>
+                <%= link "Eliminar",
+                  to: Routes.contact_path(@conn, :delete, contact), method: :delete, data: [confirm: "Estás seguro/a?"],
+                  class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
+                %>
+              <% end %>
             </div>
           </td>
         </tr>

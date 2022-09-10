@@ -3,6 +3,7 @@ defmodule SafePet24Web.UserRegistrationController do
 
   alias SafePet24.Accounts
   alias SafePet24.Accounts.User
+  alias SafePet24.Contacts
   alias SafePet24Web.UserAuth
 
   plug :put_root_layout, "session.html"
@@ -18,6 +19,10 @@ defmodule SafePet24Web.UserRegistrationController do
   def create(conn, %{"user" => user_params}) do
     case Accounts.register_user(user_params) do
       {:ok, user} ->
+        contact_params = Map.put(user_params, "user_id", user.id)
+
+        {:ok, _} = Contacts.create_contact(contact_params)
+
         {:ok, _} =
           Accounts.deliver_user_confirmation_instructions(
             user,

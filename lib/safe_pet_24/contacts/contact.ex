@@ -17,7 +17,7 @@ defmodule SafePet24.Contacts.Contact do
   def changeset(contact, attrs) do
     contact
     |> cast(attrs, [:name, :phone, :email, :address, :user_id])
-    |> validate_required([:name, :phone, :email, :address, :user_id])
+    |> validate_required([:name, :phone, :email, :user_id])
     |> validate_length(:name, min: 4, max: 40)
     |> validate_length(:address, min: 4, max: 40)
     |> validate_length(:phone, is: 10)

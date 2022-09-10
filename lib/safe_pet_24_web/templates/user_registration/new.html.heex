@@ -6,7 +6,12 @@
   <% end %>
 
   <div class="relative w-full my-2">
-    <%= label f, :email, "Usuario", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+    <%= label f, :name, "Nombre Completo", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+    <%= text_input f, :name, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+    <%= error_tag f, :name %>
+  </div>
+  <div class="relative w-full my-2">
+    <%= label f, :email, "Correo", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
     <%= email_input f, :email, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
     <%= error_tag f, :email %>
   </div>
@@ -14,6 +19,11 @@
     <%= label f, :serial, :serial, class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
     <%= text_input f, :serial, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
     <%= error_tag f, :serial %>
+  </div>
+  <div class="relative w-full my-2">
+    <%= label f, :phone, "Celular", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+    <%= text_input f, :phone, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+    <%= error_tag f, :phone %>
   </div>
   <div class="relative w-full my-2">
     <%= label f, :password, "Contraseña", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>

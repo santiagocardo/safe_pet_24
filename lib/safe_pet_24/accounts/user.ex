@@ -8,6 +8,8 @@ defmodule SafePet24.Accounts.User do
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
+    field :name, :string, virtual: true
+    field :phone, :string, virtual: true
 
     has_many :pets, SafePet24.Pets.Pet
     has_many :contacts, SafePet24.Contacts.Contact
@@ -34,10 +36,13 @@ defmodule SafePet24.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password, :serial])
+    |> cast(attrs, [:email, :password, :serial, :name, :phone])
     |> validate_serial()
     |> validate_email()
     |> validate_password(opts)
+    |> validate_required([:name, :phone])
+    |> validate_length(:name, min: 4, max: 40)
+    |> validate_length(:phone, is: 10)
   end
 
   defp validate_email(changeset) do
@@ -46,7 +51,7 @@ defmodule SafePet24.Accounts.User do
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/,
       message: "debe tener el signo @ y sin espacios"
     )
-    |> validate_length(:email, max: 160)
+    |> validate_length(:email, max: 80)
     |> unsafe_validate_unique(:email, SafePet24.Repo, message: "ya está en uso")
     |> unique_constraint(:email, message: "ya está en uso")
   end

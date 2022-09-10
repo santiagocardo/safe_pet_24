@@ -22,8 +22,9 @@ defmodule SafePet24Web.PageController do
 
   def create(conn, %{"coords" => coords, "serial" => serial}) do
     pet = SafePet24.Pets.get_pet_by_serial(serial)
+    user = SafePet24.Accounts.get_user!(pet.user_id)
 
-    UserNotifier.deliver_pet_found_notification(conn.assigns.current_user, pet, coords)
+    UserNotifier.deliver_pet_found_notification(user, pet, coords)
 
     conn
     |> put_flash(:info, "Correo al propietario ha sido enviado.")

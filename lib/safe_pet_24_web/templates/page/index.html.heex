@@ -107,6 +107,13 @@
     </table>
   </div>
 
+  <form id="send-email" method="post" action="/pets/info">
+    <input name="_csrf_token" type="hidden" value={csrf_token_value()}>
+    <input id="coords" name="coords" type="hidden">
+    <input id="serial" name="serial" type="hidden" value={@pet.serial}>
+    <input id="email_status" name="email_status" type="hidden" value={@email_status}>
+  </form>
+
   <%= if Enum.any?(@pet.diseases) or Enum.any?(@pet.vaccines) or Enum.any?(@pet.medications) do %>
     <%= if Enum.any?(@pet.diseases) do %>
 

@@ -23,6 +23,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="csrf-token" content={csrf_token_value()}>
     <%= live_title_tag assigns[:page_title] || "SafePet24", suffix: " · SafePet24" %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
@@ -71,7 +72,14 @@
     var locationMessage = ""
 
     window.navigator.geolocation.getCurrentPosition(function (position) {
-      locationMessage = " La encontré en esta ubicación https://maps.google.com/maps?q=" + position.coords.latitude + "," + position.coords.longitude
+      var coords = position.coords.latitude + "," + position.coords.longitude
+      locationMessage = " La encontré en esta ubicación https://maps.google.com/maps?q=" + coords
+      document.getElementById("coords").value = coords
+      var emailStatus = document.getElementById("email_status")
+
+      if (emailStatus.value === "pending") {
+        document.getElementById("send-email").submit()
+      }
     })
 
     function sendWhatsAppMessage(event, petName, phone) {

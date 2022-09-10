@@ -76,4 +76,21 @@ defmodule SafePet24.Accounts.UserNotifier do
     ==============================
     """)
   end
+
+  def deliver_pet_found_notification(user, pet, coords) do
+    deliver(user.email, "Tu mascota ha sido encontrada", """
+
+    ==============================
+
+    Hola #{user.email},
+
+    Alguien ha encontrado a tu mascota #{pet.name} - #{pet.species} #{pet.breed}.
+
+    Fue encontrada en esta ubicación: https://maps.google.com/maps?q=#{coords}
+
+    Si esta no es tu mascota, por favor ignora esto.
+
+    ==============================
+    """)
+  end
 end

@@ -24,7 +24,7 @@ defmodule SafePet24Web.UserConfirmationController do
       :info,
       "Si su correo electrónico está en nuestro sistema y aún no ha sido confirmado, recibirá un correo electrónico con instrucciones en breve."
     )
-    |> redirect(to: "/")
+    |> redirect(to: Routes.user_session_path(conn, :new))
   end
 
   def edit(conn, %{"token" => token}) do
@@ -38,7 +38,7 @@ defmodule SafePet24Web.UserConfirmationController do
       {:ok, _} ->
         conn
         |> put_flash(:info, "Usuario confirmado exitosamente.")
-        |> redirect(to: "/")
+        |> redirect(to: Routes.user_session_path(conn, :new))
 
       :error ->
         # If there is a current user and the account was already confirmed,
@@ -52,7 +52,7 @@ defmodule SafePet24Web.UserConfirmationController do
           %{} ->
             conn
             |> put_flash(:error, "El enlace de confirmación no es válido o ha expirado.")
-            |> redirect(to: "/")
+            |> redirect(to: Routes.user_session_path(conn, :new))
         end
     end
   end

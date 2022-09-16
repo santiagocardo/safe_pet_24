@@ -13,7 +13,7 @@ defmodule SafePet24Web.ContactController do
   end
 
   def new(conn, _params) do
-    if Contacts.total_contacts(conn.assigns.current_user.id) < 6 do
+    if Contacts.total_contacts(conn.assigns.current_user.id) < 5 do
       changeset = Contacts.change_contact(%Contact{})
 
       conn

@@ -54,7 +54,7 @@ defmodule SafePet24.Pets.Pet do
     |> validate_length(:food_type, min: 2, max: 40)
     |> validate_length(:consumption_frequency, min: 2, max: 30)
     |> validate_length(:food_brand, min: 2, max: 40)
-    |> validate_length(:reward, min: 1, max: 999_999_999)
+    |> validate_length(:reward, min: 1, max: 9_999_999_999)
     |> unsafe_validate_unique(:serial, SafePet24.Repo, message: "ya está en uso")
     |> unique_constraint(:serial, message: "ya está en uso")
     |> validate_change(:serial, fn :serial, serial ->

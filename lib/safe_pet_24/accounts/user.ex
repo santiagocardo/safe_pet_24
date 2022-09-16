@@ -62,9 +62,7 @@ defmodule SafePet24.Accounts.User do
     |> validate_length(:password, min: 12, max: 72)
     |> validate_format(:password, ~r/[a-z]/, message: "al menos un carácter debe ir en minúscula")
     |> validate_format(:password, ~r/[A-Z]/, message: "al menos un carácter debe ir en mayúscula")
-    |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/,
-      message: "al menos un dígito o carácter de puntuación"
-    )
+    |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "al menos un digito numérico")
     |> maybe_hash_password(opts)
   end
 

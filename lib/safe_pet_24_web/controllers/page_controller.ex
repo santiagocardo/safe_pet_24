@@ -22,12 +22,16 @@ defmodule SafePet24Web.PageController do
 
   def create(conn, %{"coords" => coords, "serial" => serial}) do
     pet = SafePet24.Pets.get_pet_by_serial(serial)
-    user = SafePet24.Accounts.get_user!(pet.user_id)
 
-    UserNotifier.deliver_pet_found_notification(user, pet, coords)
+    user =
+      pet.user_id
+      |> SafePet24.Accounts.get_user!()
+      |> SafePet24.Repo.preload(:contacts)
+
+    Enum.each(user.contacts, &UserNotifier.deliver_pet_found_notification(&1, pet, coords))
 
     conn
-    |> put_flash(:info, "Correo al propietario ha sido enviado.")
+    |> put_flash(:info, "Correo a los contactos ha sido enviado.")
     |> redirect(to: Routes.page_path(conn, :index, serial) <> "?email_status=sent")
   end
 end

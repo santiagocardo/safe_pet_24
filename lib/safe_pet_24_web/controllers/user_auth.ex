@@ -129,21 +129,14 @@ defmodule SafePet24Web.UserAuth do
   they use the application at all, here would be a good place.
   """
   def require_authenticated_user(conn, _opts) do
-    case conn.assigns[:current_user] do
-      %User{confirmed_at: nil} ->
-        conn
-        |> put_flash(:error, "Debes confirmar tu cuenta para acceder a esta página.")
-        |> redirect(to: Routes.user_confirmation_path(conn, :new))
-
-      %User{} ->
-        conn
-
-      nil ->
-        conn
-        |> put_flash(:error, "Debes iniciar sesión para acceder a esta página.")
-        |> maybe_store_return_to()
-        |> redirect(to: Routes.user_session_path(conn, :new))
-        |> halt()
+    if conn.assigns[:current_user] do
+      conn
+    else
+      conn
+      |> put_flash(:error, "Debes iniciar sesión para acceder a esta página.")
+      |> maybe_store_return_to()
+      |> redirect(to: Routes.user_session_path(conn, :new))
+      |> halt()
     end
   end
 

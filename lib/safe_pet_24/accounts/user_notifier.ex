@@ -82,13 +82,11 @@ defmodule SafePet24.Accounts.UserNotifier do
 
     ==============================
 
-    Hola #{user.email},
+    Hola #{user.name},
 
-    Alguien ha encontrado a tu mascota #{pet.name} - #{pet.species} #{pet.breed}.
+    Se ha escaneado el código de #{pet.name}. Por favor conserva la calma, te invitamos a validar que se encuentre bien.
 
-    Fue encontrada en esta ubicación: https://maps.google.com/maps?q=#{coords}
-
-    Si esta no es tu mascota, por favor ignora esto.
+    El código se escaneó en esta ubicación: https://maps.google.com/maps?q=#{coords}
 
     ==============================
     """)

@@ -1,7 +1,7 @@
 <.form let={f} for={@changeset} action={@action}>
   <%= hidden_input f, :action, name: "kind", value: "medications" %>
 
-  <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+  <div id="medications" class="flex-auto px-4 lg:px-10 py-10 pt-0">
     <h6 class="text-gray-400 text-sm mt-3 mb-6 font-bold uppercase">
       Medicamentos
     </h6>
@@ -28,7 +28,7 @@
               <th class="p-2"></th>
             </tr>
           </thead>
-          <tbody id="medications">
+          <tbody>
             <%= for medication <- inputs_for(f, :medications) do %>
               <tr class="align-top border border-solid border-l-0 border-r-0 text-sm whitespace-nowrap">
                 <td class="p-2">

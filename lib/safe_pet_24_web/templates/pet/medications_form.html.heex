@@ -34,7 +34,7 @@
           </thead>
           <tbody id="medications">
             <%= for medication <- inputs_for(f, :medications) do %>
-              <tr class="align-middle border border-solid border-l-0 border-r-0 text-sm whitespace-nowrap">
+              <tr class="align-top border border-solid border-l-0 border-r-0 text-sm whitespace-nowrap">
                 <td class="p-2">
                   <%= text_input medication, :name, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
                   <%= error_tag medication, :name %>

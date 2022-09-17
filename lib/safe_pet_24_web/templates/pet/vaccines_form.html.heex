@@ -1,9 +1,5 @@
 <.form let={f} for={@changeset} action={@action}>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Ups, algo estuvo mal! Por favor revisa los errores abajo.</p>
-    </div>
-  <% end %>
+  <%= hidden_input f, :action, name: "kind", value: "vaccines" %>
 
   <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
     <h6 class="text-gray-400 text-sm mt-3 mb-6 font-bold uppercase">

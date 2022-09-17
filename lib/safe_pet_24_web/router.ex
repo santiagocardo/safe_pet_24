@@ -70,8 +70,8 @@ defmodule SafePet24Web.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     get "/", PetController, :index
-    get "/pets/clinical-profile", PetController, :clinical_profile
-    put "/pets/clinical-profile", PetController, :update_clinical_profile
+    get "/pets/clinical-profile/:id", PetController, :clinical_profile
+    put "/pets/clinical-profile/:id", PetController, :update_clinical_profile
     delete "/pets/disease", PetController, :delete_disease
     post "/pets/disease", PetController, :create_disease
     delete "/pets/vaccine", PetController, :delete_vaccine

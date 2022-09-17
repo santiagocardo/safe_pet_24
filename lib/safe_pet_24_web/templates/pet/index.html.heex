@@ -61,7 +61,7 @@
                 class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
               %>
               <%= link "Perfil Clínico",
-                to: Routes.pet_path(@conn, :clinical_profile, %{"id" => pet.id}),
+                to: Routes.pet_path(@conn, :clinical_profile, pet),
                 class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
               %>
               <%= link "Eliminar",

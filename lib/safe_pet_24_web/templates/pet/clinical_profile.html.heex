@@ -6,11 +6,17 @@
   </div>
 </div>
 
-<%= render "diseases_form.html", Map.put(assigns, :action, Routes.pet_path(@conn, :update_clinical_profile, %{"id" => @pet.id})) %>
+<%= if @changeset.action do %>
+  <div class="alert alert-danger">
+    <p>Ups, algo estuvo mal! Por favor revisa los errores abajo.</p>
+  </div>
+<% end %>
+
+<%= render "diseases_form.html", Map.put(assigns, :action, Routes.pet_path(@conn, :update_clinical_profile, @pet)) %>
 <%= render "disease.html", Map.put(assigns, :action, Routes.pet_path(@conn, :create_disease)) %>
-<%= render "vaccines_form.html", Map.put(assigns, :action, Routes.pet_path(@conn, :update_clinical_profile, %{"id" => @pet.id})) %>
+<%= render "vaccines_form.html", Map.put(assigns, :action, Routes.pet_path(@conn, :update_clinical_profile, @pet)) %>
 <%= render "vaccine.html", Map.put(assigns, :action, Routes.pet_path(@conn, :create_vaccine)) %>
-<%= render "medications_form.html", Map.put(assigns, :action, Routes.pet_path(@conn, :update_clinical_profile, %{"id" => @pet.id})) %>
+<%= render "medications_form.html", Map.put(assigns, :action, Routes.pet_path(@conn, :update_clinical_profile, @pet)) %>
 <%= render "medication.html", Map.put(assigns, :action, Routes.pet_path(@conn, :create_medication)) %>
 
 <div class="px-4 lg:px-10 pt-0 pb-10">

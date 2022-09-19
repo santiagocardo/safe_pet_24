@@ -13,6 +13,8 @@ defmodule SafePet24.Application do
       SafePet24.Repo,
       # Start the Telemetry supervisor
       SafePet24Web.Telemetry,
+      # Start the unconfirmed accounts process
+      SafePet24.UnconfirmedAccounts,
       # Start the PubSub system
       {Phoenix.PubSub, name: SafePet24.PubSub},
       # Start the Endpoint (http/https)

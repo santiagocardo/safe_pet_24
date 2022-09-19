@@ -350,4 +350,11 @@ defmodule SafePet24.Accounts do
       {:error, :user, changeset, _} -> {:error, changeset}
     end
   end
+
+  def get_unconfirmed_users() do
+    from(u in User, where: is_nil(u.confirmed_at))
+    |> Repo.all()
+  end
+
+  def delete_user(%User{} = user), do: Repo.delete(user)
 end

@@ -3,7 +3,6 @@ defmodule SafePet24Web.UserAuth do
   import Phoenix.Controller
 
   alias SafePet24.Accounts
-  alias SafePet24.Accounts.User
   alias SafePet24Web.Router.Helpers, as: Routes
 
   # Make the remember me cookie valid for 60 days.

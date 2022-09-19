@@ -8,11 +8,11 @@ defmodule SafePet24Web.PageController do
   def index(conn, %{"serial" => serial} = params) do
     if pet = SafePet24.Pets.get_pet_by_serial(serial) do
       contacts = SafePet24.Contacts.list_contacts(pet.user_id)
-      email_status = params["email_status"] || "pending"
+      refresh = params["refresh"] || "pending"
 
       conn
       |> assign(:page_title, "Información de la Mascota")
-      |> render("index.html", pet: pet, contacts: contacts, email_status: email_status)
+      |> render("index.html", pet: pet, contacts: contacts, refresh: refresh)
     else
       conn
       |> put_flash(:error, "Mascota no registrada")
@@ -30,8 +30,6 @@ defmodule SafePet24Web.PageController do
 
     Enum.each(user.contacts, &UserNotifier.deliver_pet_found_notification(&1, pet, coords))
 
-    conn
-    |> put_flash(:info, "Correo a los contactos ha sido enviado.")
-    |> redirect(to: Routes.page_path(conn, :index, serial) <> "?email_status=sent")
+    redirect(conn, to: Routes.page_path(conn, :index, serial) <> "?refresh=done")
   end
 end

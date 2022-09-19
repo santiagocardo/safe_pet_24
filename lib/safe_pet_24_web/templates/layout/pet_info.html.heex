@@ -75,7 +75,7 @@
       var coords = position.coords.latitude + "," + position.coords.longitude
       locationMessage = " La encontré en esta ubicación https://maps.google.com/maps?q=" + coords
       document.getElementById("coords").value = coords
-      var emailStatus = document.getElementById("email_status")
+      var emailStatus = document.getElementById("refresh")
 
       if (emailStatus.value === "pending") {
         document.getElementById("send-email").submit()

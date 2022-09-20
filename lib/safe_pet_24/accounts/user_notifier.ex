@@ -23,7 +23,7 @@ defmodule SafePet24.Accounts.UserNotifier do
   """
   def deliver_confirmation_instructions(user, url) do
     text_body = """
-    Hola #{user.name},
+    Hola #{user.email},
 
     Puede confirmar su cuenta visitando la siguiente URL:
 
@@ -33,7 +33,7 @@ defmodule SafePet24.Accounts.UserNotifier do
     """
 
     html_body = """
-    <p>Hola #{user.name},</p>
+    <p>Hola #{user.email},</p>
     <p>Puede confirmar su cuenta visitando la siguiente URL:</p>
     <p>#{url}</p>
     <p>Si no has solicitado este cambio, por favor ignora esto.</p>
@@ -47,7 +47,7 @@ defmodule SafePet24.Accounts.UserNotifier do
   """
   def deliver_reset_password_instructions(user, url) do
     text_body = """
-    Hola #{user.name},
+    Hola #{user.email},
 
     Puede restablecer su contraseña visitando la siguiente URL:
 
@@ -57,7 +57,7 @@ defmodule SafePet24.Accounts.UserNotifier do
     """
 
     html_body = """
-    <p>Hola #{user.name},</p>
+    <p>Hola #{user.email},</p>
     <p>Puede restablecer su contraseña visitando la siguiente URL:</p>
     <p>#{url}</p>
     <p>Si no has solicitado este cambio, por favor ignora esto.</p>
@@ -71,7 +71,7 @@ defmodule SafePet24.Accounts.UserNotifier do
   """
   def deliver_update_email_instructions(user, url) do
     text_body = """
-    Hola #{user.name},
+    Hola #{user.email},
 
     Puede cambiar su correo electrónico visitando la siguiente URL:
 
@@ -81,7 +81,7 @@ defmodule SafePet24.Accounts.UserNotifier do
     """
 
     html_body = """
-    <p>Hola #{user.name},</p>
+    <p>Hola #{user.email},</p>
     <p>Puede cambiar su correo electrónico visitando la siguiente URL:</p>
     <p>#{url}</p>
     <p>Si no has solicitado este cambio, por favor ignora esto.</p>

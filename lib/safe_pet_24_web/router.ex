@@ -83,7 +83,6 @@ defmodule SafePet24Web.Router do
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
-    get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
   end
 
   scope "/", SafePet24Web do
@@ -96,5 +95,6 @@ defmodule SafePet24Web.Router do
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :edit
     post "/users/confirm/:token", UserConfirmationController, :update
+    get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
   end
 end

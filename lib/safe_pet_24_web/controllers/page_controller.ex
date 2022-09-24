@@ -20,7 +20,7 @@ defmodule SafePet24Web.PageController do
     end
   end
 
-  def create(conn, %{"coords" => coords, "serial" => serial}) do
+  def send_notification(conn, %{"coords" => coords, "serial" => serial}) do
     pet = SafePet24.Pets.get_pet_by_serial(serial)
 
     user =

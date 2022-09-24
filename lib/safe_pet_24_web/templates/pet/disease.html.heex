@@ -5,6 +5,7 @@
     </div>
   <% end %>
 
+  <%= hidden_input f, :pet_id, name: "disease[pet_id]", value: @pet.id %>
   <div class="flex-auto px-4 lg:px-10 pb-10">
     <h6 class="text-gray-400 text-xs px-4 my-3 font-bold uppercase">
       Registrar Enfermedad

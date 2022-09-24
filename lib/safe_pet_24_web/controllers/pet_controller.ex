@@ -121,10 +121,7 @@ defmodule SafePet24Web.PetController do
     end
   end
 
-  def create_disease(conn, %{"disease" => disease_params}) do
-    pet_id = get_in(conn.private, [:plug_session, "current_pet_id"])
-    disease_params = Map.put(disease_params, "pet_id", pet_id)
-
+  def create_disease(conn, %{"disease" => %{"pet_id" => pet_id} = disease_params}) do
     case Pets.create_disease(disease_params) do
       {:ok, _disease} ->
         conn
@@ -152,10 +149,7 @@ defmodule SafePet24Web.PetController do
     |> redirect(to: Routes.pet_path(conn, :clinical_profile, disease.pet_id) <> "#diseases")
   end
 
-  def create_vaccine(conn, %{"vaccine" => vaccine_params}) do
-    pet_id = get_in(conn.private, [:plug_session, "current_pet_id"])
-    vaccine_params = Map.put(vaccine_params, "pet_id", pet_id)
-
+  def create_vaccine(conn, %{"vaccine" => %{"pet_id" => pet_id} = vaccine_params}) do
     case Pets.create_vaccine(vaccine_params) do
       {:ok, _vaccine} ->
         conn
@@ -183,10 +177,7 @@ defmodule SafePet24Web.PetController do
     |> redirect(to: Routes.pet_path(conn, :clinical_profile, vaccine.pet_id) <> "#vaccines")
   end
 
-  def create_medication(conn, %{"medication" => medication_params}) do
-    pet_id = get_in(conn.private, [:plug_session, "current_pet_id"])
-    medication_params = Map.put(medication_params, "pet_id", pet_id)
-
+  def create_medication(conn, %{"medication" => %{"pet_id" => pet_id} = medication_params}) do
     case Pets.create_medication(medication_params) do
       {:ok, _medication} ->
         conn

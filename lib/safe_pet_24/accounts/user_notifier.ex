@@ -23,7 +23,7 @@ defmodule SafePet24.Accounts.UserNotifier do
   """
   def deliver_confirmation_instructions(user, url) do
     text_body = """
-    Hola #{user.email},
+    ¡Hola!
 
     Puede confirmar su cuenta visitando la siguiente URL:
 
@@ -33,10 +33,10 @@ defmodule SafePet24.Accounts.UserNotifier do
     """
 
     html_body = """
-    <p>Hola #{user.email},</p>
+    <p>¡Hola!</p>
     <p>Puede confirmar su cuenta visitando la siguiente URL:</p>
     <p>#{url}</p>
-    <p>Si no has solicitado este cambio, por favor ignora esto.</p>
+    <p>Si no has creado una cuenta con nosotros, ignora esto.</p>
     """
 
     deliver(user.email, "Instrucciones de confirmación de cuenta", text_body, html_body)
@@ -47,20 +47,20 @@ defmodule SafePet24.Accounts.UserNotifier do
   """
   def deliver_reset_password_instructions(user, url) do
     text_body = """
-    Hola #{user.email},
+    ¡Hola!
 
     Puede restablecer su contraseña visitando la siguiente URL:
 
     #{url}
 
-    Si no has solicitado este cambio, por favor ignora esto.
+    Si no has creado una cuenta con nosotros, ignora esto.
     """
 
     html_body = """
-    <p>Hola #{user.email},</p>
+    <p>¡Hola!</p>
     <p>Puede restablecer su contraseña visitando la siguiente URL:</p>
     <p>#{url}</p>
-    <p>Si no has solicitado este cambio, por favor ignora esto.</p>
+    <p>Si no has creado una cuenta con nosotros, ignora esto.</p>
     """
 
     deliver(user.email, "Instrucciones para restablecer la contraseña", text_body, html_body)
@@ -71,20 +71,20 @@ defmodule SafePet24.Accounts.UserNotifier do
   """
   def deliver_update_email_instructions(user, url) do
     text_body = """
-    Hola #{user.email},
+    ¡Hola!
 
     Puede cambiar su correo electrónico visitando la siguiente URL:
 
     #{url}
 
-    Si no has solicitado este cambio, por favor ignora esto.
+    Si no has creado una cuenta con nosotros, ignora esto.
     """
 
     html_body = """
-    <p>Hola #{user.email},</p>
+    <p>¡Hola!</p>
     <p>Puede cambiar su correo electrónico visitando la siguiente URL:</p>
     <p>#{url}</p>
-    <p>Si no has solicitado este cambio, por favor ignora esto.</p>
+    <p>Si no has creado una cuenta con nosotros, ignora esto.</p>
     """
 
     deliver(

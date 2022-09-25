@@ -112,7 +112,12 @@ defmodule SafePet24.Pets do
   end
 
   def total_pets(user_id),
-    do: Repo.one(from p in Pet, where: p.user_id == ^user_id, select: fragment("count(*)"))
+    do:
+      from(p in Pet,
+        where: p.user_id == ^user_id and p.is_deleted == false,
+        select: fragment("count(*)")
+      )
+      |> Repo.one()
 
   def get_disease!(id), do: Repo.get!(Disease, id) |> Repo.preload(:pet)
 

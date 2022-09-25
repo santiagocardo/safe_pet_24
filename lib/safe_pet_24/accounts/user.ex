@@ -10,6 +10,7 @@ defmodule SafePet24.Accounts.User do
     field :confirmed_at, :naive_datetime
     field :name, :string, virtual: true
     field :phone, :string, virtual: true
+    field :acceptance, :boolean, virtual: true
 
     has_many :pets, SafePet24.Pets.Pet
     has_many :contacts, SafePet24.Contacts.Contact
@@ -40,7 +41,7 @@ defmodule SafePet24.Accounts.User do
     |> validate_serial()
     |> validate_email()
     |> validate_password(opts)
-    |> validate_required([:name, :phone])
+    |> validate_required([:name, :phone, :acceptance])
     |> validate_length(:name, min: 4, max: 40)
     |> validate_length(:phone, is: 10)
   end

@@ -21,7 +21,7 @@ defmodule SafePet24.Pets do
 
   """
   def list_pets(user_id) do
-    from(p in Pet, where: p.user_id == ^user_id) |> Repo.all()
+    from(p in Pet, where: p.user_id == ^user_id and p.is_deleted == false) |> Repo.all()
   end
 
   @doc """
@@ -43,7 +43,7 @@ defmodule SafePet24.Pets do
   def get_pet_by_serial(serial),
     do:
       Pet
-      |> Repo.get_by(serial: serial)
+      |> Repo.get_by(serial: serial, is_deleted: false)
       |> Repo.preload([:diseases, :vaccines, :medications])
 
   @doc """

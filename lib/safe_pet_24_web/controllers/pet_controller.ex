@@ -46,7 +46,7 @@ defmodule SafePet24Web.PetController do
   def show(conn, %{"id" => id}) do
     pet = Pets.get_pet!(id)
 
-    if pet.user_id == conn.assigns.current_user.id do
+    if not pet.is_deleted && pet.user_id == conn.assigns.current_user.id do
       conn
       |> assign(:page_title, "Ver Mascota")
       |> render("show.html", pet: pet)
@@ -58,7 +58,7 @@ defmodule SafePet24Web.PetController do
   def edit(conn, %{"id" => id}) do
     pet = Pets.get_pet!(id)
 
-    if pet.user_id == conn.assigns.current_user.id do
+    if not pet.is_deleted && pet.user_id == conn.assigns.current_user.id do
       changeset = Pets.change_pet(pet)
 
       conn
@@ -85,7 +85,7 @@ defmodule SafePet24Web.PetController do
 
   def delete(conn, %{"id" => id}) do
     pet = Pets.get_pet!(id)
-    {:ok, _pet} = Pets.delete_pet(pet)
+    {:ok, _pet} = Pets.update_pet(pet, %{is_deleted: true})
 
     conn
     |> put_flash(:info, "Mascota eliminada exitosamente.")
@@ -95,7 +95,7 @@ defmodule SafePet24Web.PetController do
   def clinical_profile(conn, %{"id" => id}) do
     pet = Pets.get_pet!(id)
 
-    if pet.user_id == conn.assigns.current_user.id do
+    if not pet.is_deleted && pet.user_id == conn.assigns.current_user.id do
       changeset = Pets.change_pet(pet)
 
       conn
@@ -214,7 +214,7 @@ defmodule SafePet24Web.PetController do
 
   defp redirect_to_index(conn) do
     conn
-    |> put_flash(:info, "No tienes permisos sobre esta mascota.")
+    |> put_flash(:error, "Mascota no existente")
     |> redirect(to: Routes.pet_path(conn, :index))
   end
 end

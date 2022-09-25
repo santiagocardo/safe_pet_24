@@ -15,6 +15,7 @@ defmodule SafePet24.Pets.Pet do
     field :serial, :string
     field :species, :string
     field :weight, :integer
+    field :is_deleted, :boolean, default: false
 
     belongs_to :user, SafePet24.Accounts.User
     has_many :diseases, SafePet24.Pets.Disease, on_replace: :delete
@@ -40,7 +41,8 @@ defmodule SafePet24.Pets.Pet do
       :consumption_frequency,
       :food_brand,
       :serial,
-      :user_id
+      :user_id,
+      :is_deleted
     ])
     |> cast_assoc(:diseases)
     |> cast_assoc(:vaccines)

@@ -20,7 +20,7 @@ msgstr "ya ha sido tomado"
 
 ## From Ecto.Changeset.put_change/3
 msgid "is invalid"
-msgstr "es inválido"
+msgstr "no es válido"
 
 ## From Ecto.Changeset.validate_acceptance/3
 msgid "must be accepted"

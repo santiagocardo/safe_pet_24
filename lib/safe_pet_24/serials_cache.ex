@@ -28,9 +28,9 @@ defmodule SafePet24.SerialsCache do
 
   def handle_info(:fetch_serials, state) do
     {:ok, {_response, _response_headers, body}} =
-      :httpc.request("https://drive.google.com/uc?id=15RGVqoudh-AP_bcUDCddBblecxU_6vnA")
+      :httpc.request("https://drive.google.com/uc?id=1T1yTxuQ8UunEDxpU9DNUMMmUKczuzeDH")
 
-    serials = to_string(body) |> String.replace("\n", "") |> String.split(",", trim: true)
+    serials = to_string(body) |> String.split("\r\n", trim: true)
 
     {:noreply, schedule_fetch(%{state | serials: serials})}
   end

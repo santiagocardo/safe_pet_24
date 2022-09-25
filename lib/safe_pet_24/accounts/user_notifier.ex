@@ -29,14 +29,14 @@ defmodule SafePet24.Accounts.UserNotifier do
 
     #{url}
 
-    Si no has creado una cuenta con nosotros, ignora esto.
+    Si no has creado una cuenta con nosotros, por favor ignora esto.
     """
 
     html_body = """
     <p>¡Hola!</p>
     <p>Puede confirmar su cuenta visitando la siguiente URL:</p>
     <p>#{url}</p>
-    <p>Si no has creado una cuenta con nosotros, ignora esto.</p>
+    <p>Si no has creado una cuenta con nosotros, por favor ignora esto.</p>
     """
 
     deliver(user.email, "Instrucciones de confirmación de cuenta", text_body, html_body)
@@ -53,14 +53,14 @@ defmodule SafePet24.Accounts.UserNotifier do
 
     #{url}
 
-    Si no has creado una cuenta con nosotros, ignora esto.
+    Si no has solicitado este cambio, por favor ignora esto.
     """
 
     html_body = """
     <p>¡Hola!</p>
     <p>Puede restablecer su contraseña visitando la siguiente URL:</p>
     <p>#{url}</p>
-    <p>Si no has creado una cuenta con nosotros, ignora esto.</p>
+    <p>Si no has solicitado este cambio, por favor ignora esto.</p>
     """
 
     deliver(user.email, "Instrucciones para restablecer la contraseña", text_body, html_body)
@@ -77,14 +77,14 @@ defmodule SafePet24.Accounts.UserNotifier do
 
     #{url}
 
-    Si no has creado una cuenta con nosotros, ignora esto.
+    Si no has solicitado este cambio, por favor ignora esto.
     """
 
     html_body = """
     <p>¡Hola!</p>
     <p>Puede cambiar su correo electrónico visitando la siguiente URL:</p>
     <p>#{url}</p>
-    <p>Si no has creado una cuenta con nosotros, ignora esto.</p>
+    <p>Si no has solicitado este cambio, por favor ignora esto.</p>
     """
 
     deliver(

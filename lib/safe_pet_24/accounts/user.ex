@@ -37,7 +37,7 @@ defmodule SafePet24.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password, :serial, :name, :phone])
+    |> cast(attrs, [:email, :password, :serial, :name, :phone, :acceptance])
     |> validate_serial()
     |> validate_email()
     |> validate_password(opts)

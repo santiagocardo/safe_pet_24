@@ -76,35 +76,23 @@
     Contactos
   </h6>
 
-  <div class="block w-full overflow-x-auto">
-    <!-- table -->
-    <table class="items-center w-full bg-transparent border-collapse">
-      <thead>
-        <tr class="align-middle text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
-          <th class="p-3">Nombre</th>
-          <th class="p-3">WhatsApp</th>
-          <th class="p-3">Teléfono</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= for contact <- @contacts do %>
-          <tr class="align-middle text-sm text-left whitespace-nowrap">
-            <th class="p-3 border border-solid border-l-0 border-r-0">
-              <span class="capitalize font-bold text-gray-600"><%= contact.name %></span>
-            </th>
-            <td class="p-3 border border-solid border-l-0 border-r-0">
-              <button onclick={"sendWhatsAppMessage(event, '#{@pet.name}', '#{contact.phone}')"} class="text-white bg-slate-500 hover:bg-slate-700 font-bold text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150">
-                <i class="fas fa-comments text-white"></i>
-                Enviar Mensaje
-              </button>
-            </td>
-            <td class="p-3 border border-solid border-l-0 border-r-0">
-              <a href={"tel:#{contact.phone}"} target="_blank" class="underline hover:text-gray-900"><%= contact.phone %></a>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <div class="flex flex-wrap">
+    <%= for contact <- @contacts do %>
+      <div class="w-full md:w-4/12 px-4 py-2">
+        <span class="text-gray-600 text-sm font-bold mb-2"><%= contact.name %></span>
+      </div>
+      <div class="w-full md:w-4/12 px-4 py-2">
+        <button onclick={"sendWhatsAppMessage(event, '#{@pet.name}', '#{contact.phone}')"} class="text-white bg-slate-500 hover:bg-slate-700 font-bold text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150">
+          <i class="fas fa-comments text-white"></i>
+          Enviar Mensaje
+        </button>
+      </div>
+      <div class="w-full md:w-4/12 px-4 py-2">
+        <span class="uppercase text-gray-600 text-xs font-bold mb-2">Celular:</span>
+        <a href={"tel:#{contact.phone}"} target="_blank" class="underline hover:text-gray-900"><%= contact.phone %></a>
+        <hr class="md:hidden mt-6 border-b-1 border-gray-200" />
+      </div>
+    <% end %>
   </div>
 
   <form id="send-email" method="post" action="/pets/info">
@@ -121,32 +109,17 @@
         Enfermedades
       </h6>
 
-      <div class="block w-full overflow-x-auto">
-        <!-- table -->
-        <table class="items-center w-full bg-transparent border-collapse">
-          <thead>
-            <tr class="align-middle text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
-              <th class="p-3">
-                Enfermedad
-              </th>
-              <th class="p-3">
-                Cuidados
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= for disease <- @pet.diseases do %>
-              <tr class="align-middle text-sm text-left whitespace-nowrap">
-                <th class="p-3 border border-solid border-l-0 border-r-1">
-                  <span class="capitalize font-bold text-gray-600"><%= disease.name %></span>
-                </th>
-                <td class="p-3 border border-solid border-l-0 border-r-0">
-                  <%= disease.care || "-" %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+      <div class="flex flex-wrap">
+        <%= for disease <- @pet.diseases do %>
+          <div class="w-full md:w-3/12 px-4 py-2">
+            <span class="text-gray-600 text-sm font-bold mb-2"><%= disease.name %></span>
+          </div>
+          <div class="w-full md:w-9/12 px-4 py-2">
+            <span class="uppercase text-gray-600 text-xs font-bold mb-2">Cuidados:</span>
+            <p class="inline-block text-sm"><%= disease.care %></p>
+            <hr class="md:hidden mt-6 border-b-1 border-gray-200" />
+          </div>
+        <% end %>
       </div>
     <% end %>
 
@@ -155,32 +128,17 @@
         Vacunas
       </h6>
 
-      <div class="block w-full overflow-x-auto">
-        <!-- table -->
-        <table class="items-center w-full bg-transparent border-collapse">
-          <thead>
-            <tr class="align-middle text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
-              <th class="p-3">
-                Vacuna
-              </th>
-              <th class="p-3">
-                Fecha
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= for vaccine <- @pet.vaccines do %>
-              <tr class="align-middle text-sm text-left whitespace-nowrap">
-                <th class="p-3 border border-solid border-l-0 border-r-1">
-                  <span class="capitalize font-bold text-gray-600"><%= vaccine.name %></span>
-                </th>
-                <td class="p-3 border border-solid border-l-0 border-r-0">
-                  <%= vaccine.date %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+      <div class="flex flex-wrap">
+        <%= for vaccine <- @pet.vaccines do %>
+          <div class="w-full md:w-3/12 px-4 py-2">
+            <span class="text-gray-600 text-sm font-bold mb-2"><%= vaccine.name %></span>
+          </div>
+          <div class="w-full md:w-9/12 px-4 py-2">
+            <span class="uppercase text-gray-600 text-xs font-bold mb-2">Fecha:</span>
+            <p class="inline-block text-sm"><%= vaccine.date %></p>
+            <hr class="md:hidden mt-6 border-b-1 border-gray-200" />
+          </div>
+        <% end %>
       </div>
     <% end %>
 
@@ -189,40 +147,28 @@
         Medicamentos
       </h6>
 
-      <div class="block w-full overflow-x-auto">
-        <!-- table -->
-        <table class="items-center w-full bg-transparent border-collapse">
-          <thead>
-            <tr class="align-middle text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
-              <th class="p-3">
-                Medicamento
-              </th>
-              <th class="p-3">
-                Dosis
-              </th>
-              <th class="p-3">
-                Frecuencia
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= for medication <- @pet.medications do %>
-              <tr class="align-middle text-sm text-left whitespace-nowrap">
-                <th class="p-3 border border-solid border-l-0 border-r-1">
-                  <span class="capitalize font-bold text-gray-600"><%= medication.name %></span>
-                </th>
-                <td class="p-3 border border-solid border-l-0 border-r-1">
-                  <%= medication.dosage %>
-                </td>
-                <td class="p-3 border border-solid border-l-0 border-r-0">
-                  <%= medication.frequency %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+      <div class="flex flex-wrap">
+        <%= for medication <- @pet.medications do %>
+          <div class="w-full md:w-3/12 px-4 py-2">
+            <span class="text-gray-600 text-sm font-bold mb-2"><%= medication.name %></span>
+          </div>
+          <div class="w-full md:w-4/12 px-4 py-2">
+            <span class="uppercase text-gray-600 text-xs font-bold mb-2">Dosis:</span>
+            <p class="inline-block text-sm"><%= medication.dosage %></p>
+          </div>
+          <div class="w-full md:w-4/12 px-4 py-2">
+            <span class="uppercase text-gray-600 text-xs font-bold mb-2">Frecuencia:</span>
+            <p class="inline-block text-sm"><%= medication.frequency %></p>
+            <hr class="md:hidden mt-6 border-b-1 border-gray-200" />
+          </div>
+        <% end %>
       </div>
     <% end %>
 
   <% end %>
+  <hr class="hidden md:block mt-6 border-b-1 border-gray-300" />
+
+  <div class="mt-6 text-center">
+    <a href="https://safepet24.com" class="bg-slate-500 text-white hover:bg-slate-600 font-bold uppercase text-xs px-12 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150">Salir</a>
+  </div>
 </div>

@@ -10,48 +10,31 @@
 
     <%= if Enum.any?(@pet.vaccines) do %>
 
-      <div class="block w-full overflow-x-auto">
-        <!-- table -->
-        <table class="items-center w-full bg-transparent border-collapse">
-          <thead>
-            <tr class="bg-gray-50 text-gray-500 align-middle text-xs uppercase whitespace-nowrap font-semibold text-left">
-              <th class="pl-2 pr-20 py-2">
-                Vacuna
-              </th>
-              <th class="p-2">
-                Fecha
-              </th>
-              <th class="p-2"></th>
-              <th class="p-2"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= for vaccine <- inputs_for(f, :vaccines) do %>
-              <tr class="align-top border border-solid border-l-0 border-r-0 text-sm whitespace-nowrap">
-                <td class="p-2">
-                  <%= text_input vaccine, :name, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
-                  <%= error_tag vaccine, :name %>
-                </td>
-                <td class="p-2">
-                  <%= date_input vaccine, :date, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
-                  <%= error_tag vaccine, :date %>
-                </td>
-                <td class="p-2">
-                  <%= link to: Routes.pet_path(@conn, :delete_vaccine, %{"id" => vaccine.data.id}), method: :delete, data: [confirm: "Estás seguro/a?"], class: "py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700" do %>
-                    <i class="fas fa-trash mr-2 text-sm text-gray-500"></i>
-                    Eliminar
-                  <% end %>
-                </td>
-                <td class="p-2">
-                  <%= submit phx_disable_with: "Actualizando...", class: "py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700" do %>
-                    <i class="fas fa-save mr-2 text-sm text-gray-500"></i>
-                    Actualizar
-                  <% end %>
-                </td>
-              </tr>
+      <div class="flex flex-wrap items-center">
+        <%= for vaccine <- inputs_for(f, :vaccines) do %>
+          <div class="w-full lg:w-3/12 px-4 py-2">
+            <%= label vaccine, "Nombre", class: "uppercase text-gray-600 text-xs font-bold mb-2" %>
+            <%= text_input vaccine, :name, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+            <%= error_tag vaccine, :name %>
+          </div>
+          <div class="w-full lg:w-5/12 px-4 py-2">
+            <%= label vaccine, "Fecha", class: "uppercase text-gray-600 text-xs font-bold mb-2" %>
+            <%= date_input vaccine, :date, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+            <%= error_tag vaccine, :date %>
+          </div>
+          <div class="w-6/12 px-4 pb-6 lg:w-2/12 lg:pt-6 lg:pb-2">
+            <%= submit phx_disable_with: "Actualizando...", class: "py-2 px-4 block w-full whitespace-nowrap bg-transparent text-center font-normal text-gray-700 hover:text-gray-900" do %>
+              <i class="fas fa-save mr-2 text-sm text-gray-500"></i>
+              Actualizar
             <% end %>
-          </tbody>
-        </table>
+          </div>
+          <div class="w-6/12 px-4 pb-6 lg:w-2/12 lg:pt-6 lg:pb-2">
+            <%= link to: Routes.pet_path(@conn, :delete_vaccine, %{"id" => vaccine.data.id}), method: :delete, data: [confirm: "Estás seguro/a?"], class: "py-2 px-4 block w-full whitespace-nowrap bg-transparent text-center font-normal text-gray-700 hover:text-gray-900" do %>
+              <i class="fas fa-trash mr-2 text-sm text-gray-500"></i>
+              Eliminar
+            <% end %>
+          </div>
+        <% end %>
       </div>
 
     <% end %>

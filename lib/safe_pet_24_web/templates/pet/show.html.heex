@@ -137,10 +137,20 @@
 
   <% end %>
 
-  <div class="mt-10">
+  <hr class="mt-6 border-b-1 border-gray-300" />
+
+  <div class="flex flex-wrap justify-start mt-10">
     <%= link "◀︎ Volver",
       to: Routes.pet_path(@conn, :index),
-      class: "bg-slate-500 text-white hover:bg-slate-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+      class: "bg-slate-500 text-white hover:bg-slate-600 font-bold uppercase text-xs m-2 px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+    %>
+    <%= link "Editar Mascota",
+      to: Routes.pet_path(@conn, :edit, @pet),
+      class: "bg-slate-500 text-white hover:bg-slate-600 font-bold uppercase text-xs m-2 px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+    %>
+    <%= link "Editar Perfil Clínico",
+      to: Routes.pet_path(@conn, :clinical_profile, @pet),
+      class: "bg-slate-500 text-white hover:bg-slate-600 font-bold uppercase text-xs m-2 px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
     %>
   </div>
 </div>

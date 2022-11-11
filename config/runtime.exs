@@ -91,4 +91,6 @@ if config_env() == :prod do
     port: 465,
     retries: 2,
     no_mx_lookups: false
+
+  config :safe_pet_24, :drive_parent_id, System.get_env("DRIVE_FOLDER_ID") || ""
 end

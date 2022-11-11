@@ -10,6 +10,8 @@ defmodule SafePet24.Pets.Pet do
     field :food_brand, :string
     field :food_type, :string
     field :name, :string
+    field :photo, :map, virtual: true
+    field :photo_url, :string
     field :reproductive_status, :string
     field :reward, :string
     field :serial, :string
@@ -35,6 +37,7 @@ defmodule SafePet24.Pets.Pet do
       :species,
       :breed,
       :color,
+      :photo_url,
       :reproductive_status,
       :weight,
       :food_type,
@@ -64,5 +67,21 @@ defmodule SafePet24.Pets.Pet do
 
       if serial in serials, do: [], else: [serial: "no es válido"]
     end)
+    |> maybe_upload_photo(attrs["photo"])
   end
+
+  defp maybe_upload_photo(%Ecto.Changeset{valid?: true} = changeset, %Plug.Upload{
+         filename: filename,
+         path: path
+       }) do
+    case SafePet24.GoogleDrive.upload_file(filename, path) do
+      {:ok, %GoogleApi.Drive.V3.Model.File{id: file_id}} ->
+        put_change(changeset, :photo_url, SafePet24.GoogleDrive.base_url() <> file_id)
+
+      _error ->
+        add_error(changeset, :photo, "error subiendo la foto")
+    end
+  end
+
+  defp maybe_upload_photo(changeset, _photo), do: changeset
 end

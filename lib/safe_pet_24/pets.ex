@@ -4,8 +4,8 @@ defmodule SafePet24.Pets do
   """
 
   import Ecto.Query, warn: false
-  alias SafePet24.Repo
 
+  alias SafePet24.Repo
   alias SafePet24.Pets.Pet
   alias SafePet24.Pets.Disease
   alias SafePet24.Pets.Vaccine
@@ -80,7 +80,21 @@ defmodule SafePet24.Pets do
     pet
     |> Pet.changeset(attrs)
     |> Repo.update()
+    |> maybe_delete_old_photo(pet.photo_url)
   end
+
+  defp maybe_delete_old_photo({:ok, pet}, old_photo_url) when is_binary(old_photo_url) do
+    unless pet.photo_url == old_photo_url do
+      old_photo_url
+      |> String.split(SafePet24.GoogleDrive.base_url())
+      |> List.last()
+      |> SafePet24.GoogleDrive.delete_file()
+    end
+
+    {:ok, pet}
+  end
+
+  defp maybe_delete_old_photo(update_result, _old_photo_url), do: update_result
 
   @doc """
   Deletes a pet.

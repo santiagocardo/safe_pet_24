@@ -10,6 +10,14 @@
   <h6 class="text-gray-400 text-sm mt-3 mb-6 font-bold uppercase">
     Información de tu Mascota
   </h6>
+
+  <%= if @pet.photo_url do %>
+    <div class="w-full flex justify-center">
+      <img load="lazy" src={@pet.photo_url} class="shadow-xl rounded-full w-6/12 lg:w-3/12 h-auto align-middle border" />
+    </div>
+    <hr class="border-b-1 mt-12 mb-6 border-gray-300" />
+  <% end %>
+
   <div class="flex flex-wrap">
     <div class="w-full md:w-6/12 lg:w-4/12 px-4 py-2">
       <span class="uppercase text-gray-600 text-xs font-bold mb-2">Especie:</span>

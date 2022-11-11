@@ -1,4 +1,4 @@
-<.form let={f} for={@changeset} action={@action}>
+<.form let={f} for={@changeset} action={@action} multipart={true}>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Ups, algo estuvo mal! Por favor revisa los errores abajo.</p>
@@ -21,6 +21,14 @@
     <h6 class="text-gray-400 text-sm mt-3 mb-6 font-bold uppercase">
       Información de tu Mascota
     </h6>
+
+    <%= if @conn.private.phoenix_action in [:edit, :update] && @pet.photo_url do %>
+      <div class="w-full flex justify-center">
+        <img load="lazy" src={@pet.photo_url} class="shadow-xl rounded-full w-6/12 lg:w-3/12 h-auto align-middle border" />
+      </div>
+      <hr class="border-b-1 my-12 border-gray-300" />
+    <% end %>
+
     <div class="flex flex-wrap">
       <%= unless @conn.private.phoenix_action in [:edit, :update] do %>
         <div class="w-full lg:w-4/12 px-4">
@@ -108,6 +116,14 @@
           <%= error_tag f, :reward %>
         </div>
       </div>
+      <div class="w-full lg:w-4/12 px-4">
+        <div class="relative w-full mb-3">
+          <%= label f, "Foto", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
+          <%= file_input f, :photo %>
+          <%= error_tag f, :photo %>
+        </div>
+      </div>
+
       <div class="w-full p-4">
         <div class="relative w-full">
           <%= submit "Guardar",

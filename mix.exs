@@ -51,7 +51,9 @@ defmodule SafePet24.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
-      {:gen_smtp, "~> 1.1"}
+      {:gen_smtp, "~> 1.1"},
+      {:google_api_drive, "~> 0.25.1"},
+      {:goth, "~> 1.2.0"}
     ]
   end
 

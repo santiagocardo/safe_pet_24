@@ -21,7 +21,7 @@ defmodule SafePet24.Pets do
 
   """
   def list_pets(user_id) do
-    from(p in Pet, where: p.user_id == ^user_id and p.is_deleted == false) |> Repo.all()
+    from(p in Pet, where: p.user_id == ^user_id) |> Repo.all()
   end
 
   @doc """
@@ -127,10 +127,7 @@ defmodule SafePet24.Pets do
 
   def total_pets(user_id),
     do:
-      from(p in Pet,
-        where: p.user_id == ^user_id and p.is_deleted == false,
-        select: fragment("count(*)")
-      )
+      from(p in Pet, where: p.user_id == ^user_id, select: fragment("count(*)"))
       |> Repo.one()
 
   def get_disease!(id), do: Repo.get!(Disease, id) |> Repo.preload(:pet)

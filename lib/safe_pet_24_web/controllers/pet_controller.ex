@@ -85,10 +85,12 @@ defmodule SafePet24Web.PetController do
 
   def delete(conn, %{"id" => id}) do
     pet = Pets.get_pet!(id)
-    {:ok, _pet} = Pets.update_pet(pet, %{is_deleted: true})
+    {:ok, _pet} = Pets.update_pet(pet, %{is_deleted: !pet.is_deleted})
+
+    toggle = if pet.is_deleted, do: "activada", else: "desactivada"
 
     conn
-    |> put_flash(:info, "Mascota eliminada exitosamente.")
+    |> put_flash(:info, "Mascota #{toggle} exitosamente.")
     |> redirect(to: Routes.pet_path(conn, :index))
   end
 
@@ -214,7 +216,7 @@ defmodule SafePet24Web.PetController do
 
   defp redirect_to_index(conn) do
     conn
-    |> put_flash(:error, "Mascota no existente")
+    |> put_flash(:error, "Mascota no activada")
     |> redirect(to: Routes.pet_path(conn, :index))
   end
 end

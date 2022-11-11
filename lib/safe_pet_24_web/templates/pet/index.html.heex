@@ -14,6 +14,9 @@
         <th class="w-full px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
           Nombre
         </th>
+        <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100">
+          Serial
+        </th>
         <th class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-gray-50 text-gray-500 border-gray-100"></th>
       </tr>
     </thead>
@@ -21,10 +24,17 @@
       <%= for pet <- @pets do %>
         <tr id={"pet-#{pet.id}"} class="border-t-2">
           <th class="px-6 py-2 align-middle border-t-0 border-l-0 border-r-0 text-sm capitalize whitespace-nowrap text-left">
-            <%= link to: Routes.pet_path(@conn, :show, pet) do %>
-              <span class="font-bold text-gray-600 hover:text-gray-900"><%= pet.name %></span>
+            <%= if pet.is_deleted do %>
+              <span class="text-gray-400"><%= pet.name %></span>
+            <% else %>
+              <%= link to: Routes.pet_path(@conn, :show, pet) do %>
+                <span class="font-bold text-gray-600 hover:text-gray-900"><%= pet.name %></span>
+              <% end %>
             <% end %>
           </th>
+          <td class="px-6 py-2 align-middle border-t-0 border-l-0 border-r-0 text-sm capitalize whitespace-nowrap text-left">
+            <span class="text-gray-600"><%= pet.serial %></span>
+          </td>
           <td class="px-6 py-2 align-middle border-t-0 border-l-0 border-r-0 text-sm whitespace-nowrap text-right">
             <a
               href="#menu"
@@ -46,8 +56,8 @@
                 to: Routes.pet_path(@conn, :clinical_profile, pet),
                 class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
               %>
-              <%= link "Eliminar",
-                to: Routes.pet_path(@conn, :delete, pet), method: :delete, data: [confirm: "Estás seguro/a? Cuando elimines tu mascota no podrás reactivar el código"],
+              <%= link "#{if pet.is_deleted, do: "Activar", else: "Desactivar"}",
+                to: Routes.pet_path(@conn, :delete, pet), method: :delete, data: [confirm: "Estás seguro/a?"],
                 class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
               %>
             </div>

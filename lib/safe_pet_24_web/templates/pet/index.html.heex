@@ -44,18 +44,20 @@
               <i class="fas fa-ellipsis-v"></i>
             </a>
             <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48" id={"table-light-1-dropdown-#{pet.id}"}>
-              <%= link "Ver",
-                to: Routes.pet_path(@conn, :show, pet),
-                class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
-              %>
-              <%= link "Editar",
-                to: Routes.pet_path(@conn, :edit, pet),
-                class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
-              %>
-              <%= link "Perfil Clínico",
-                to: Routes.pet_path(@conn, :clinical_profile, pet),
-                class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
-              %>
+              <%= unless pet.is_deleted do %>
+                <%= link "Ver",
+                  to: Routes.pet_path(@conn, :show, pet),
+                  class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
+                %>
+                <%= link "Editar",
+                  to: Routes.pet_path(@conn, :edit, pet),
+                  class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
+                %>
+                <%= link "Perfil Clínico",
+                  to: Routes.pet_path(@conn, :clinical_profile, pet),
+                  class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"
+                %>
+              <% end %>
               <%= link "#{if pet.is_deleted, do: "Activar", else: "Desactivar"}",
                 to: Routes.pet_path(@conn, :delete, pet), method: :delete, data: [confirm: "Estás seguro/a?"],
                 class: "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700"

@@ -39,7 +39,7 @@
       <div class="w-full lg:w-6/12 px-4">
         <div class="relative w-full mb-3">
           <%= label f, "Teléfono", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
-          <%= text_input f, :phone, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+          <input id="phone" type="tel" name="phone" required class="border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
           <%= error_tag f, :phone %>
         </div>
       </div>
@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="w-full p-4">
-        <div class="relative w-full">
+        <div class="relative w-full" onclick="setPhoneNumber()">
           <%= submit "Guardar",
             phx_disable_with: "Guardando...",
             class: "px-4 py-2 my-2 sm:my-0 text-center w-full sm:w-auto bg-slate-500 text-white hover:bg-slate-600 font-bold uppercase text-xs rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
@@ -68,4 +68,5 @@
       </div>
     <% end %>
   </div>
+  <input id="contact-phone" type="hidden" name="contact[phone]" />
 </.form>

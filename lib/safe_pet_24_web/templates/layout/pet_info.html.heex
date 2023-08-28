@@ -83,7 +83,7 @@
     })
 
     function sendWhatsAppMessage(event, petName, phone) {
-      var url = "https://wa.me/57" + phone + "?text=Hola! He encontrado a tu mascota " + petName + "." + locationMessage
+      var url = "https://wa.me/" + phone + "?text=Hola! He encontrado a tu mascota " + petName + "." + locationMessage
       window.open(url, '_blank').focus()
     }
   </script>

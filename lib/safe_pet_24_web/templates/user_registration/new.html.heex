@@ -22,7 +22,7 @@
   </div>
   <div class="relative w-full my-2">
     <%= label f, :phone, "Celular", class: "block uppercase text-gray-600 text-xs font-bold mb-2" %>
-    <%= text_input f, :phone, required: true, class: "border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" %>
+    <input id="phone" type="tel" name="phone" required class="border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
     <%= error_tag f, :phone %>
   </div>
   <div class="relative w-full my-2">
@@ -42,9 +42,10 @@
     <%= checkbox f, :acceptance, required: true, class: "form-checkbox border-0 rounded text-blue-700 ml-1 w-5 h-5 ease-linear transition-all duration-150" %>
     <%= error_tag f, :acceptance %>
   </div>
-  <div class="text-center mt-6">
+  <div class="text-center mt-6" onclick="setPhoneNumber()">
     <%= submit "Registrame", class: "bg-gray-800 text-white active:bg-gray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150" %>
   </div>
+  <input id="user-phone" type="hidden" name="user[phone]" />
 </.form>
 
 <p>

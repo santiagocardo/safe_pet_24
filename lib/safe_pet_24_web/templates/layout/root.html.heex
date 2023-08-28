@@ -8,7 +8,9 @@
     <%= live_title_tag assigns[:page_title] || "SafePet24", suffix: " · SafePet24" %>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
   </head>
   <body class="text-gray-500 antialiased">
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -265,6 +267,22 @@
         });
         document.getElementById(dropdownID).classList.toggle("hidden");
         document.getElementById(dropdownID).classList.toggle("block");
+      }
+    </script>
+    <script>
+      const phoneInputField = document.querySelector("#phone");
+
+      if (phoneInputField) {
+        var phoneInput = window.intlTelInput(phoneInputField, {
+          initialCountry: "co",
+          preferredCountries: ["co", "us"],
+          formatOnDisplay: false,
+          utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+        });
+      }
+
+      function setPhoneNumber() {
+        document.getElementById("contact-phone").value = phoneInput.getNumber();
       }
     </script>
   </body>

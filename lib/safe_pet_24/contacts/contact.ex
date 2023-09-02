@@ -2,6 +2,8 @@ defmodule SafePet24.Contacts.Contact do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @phone_length_message "%{count} números incluyendo el indicativo de tu país"
+
   schema "contacts" do
     field :address, :string
     field :email, :string
@@ -20,8 +22,9 @@ defmodule SafePet24.Contacts.Contact do
     |> validate_required([:name, :phone, :email, :user_id])
     |> validate_length(:name, min: 4, max: 40)
     |> validate_length(:address, min: 4, max: 80)
-    |> validate_length(:phone, min: 10, max: 14)
-    |> validate_format(:phone, ~r/^[\+]?[0-9]*$/, message: "solo debe tener números")
+    |> validate_length(:phone, min: 6, message: "debe tener al menos #{@phone_length_message}")
+    |> validate_length(:phone, max: 18, message: "debe tener máximo #{@phone_length_message}")
+    |> validate_format(:phone, ~r/^[\+]?[0-9]*$/, message: "solo debe contener números")
     |> validate_email()
   end
 

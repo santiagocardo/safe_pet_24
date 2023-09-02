@@ -2,6 +2,8 @@ defmodule SafePet24.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @phone_length_message "%{count} números incluyendo el indicativo de tu país"
+
   schema "users" do
     field :email, :string
     field :serial, :string
@@ -43,8 +45,9 @@ defmodule SafePet24.Accounts.User do
     |> validate_password(opts)
     |> validate_required([:name, :phone, :acceptance])
     |> validate_length(:name, min: 4, max: 40)
-    |> validate_length(:phone, min: 10, max: 14)
-    |> validate_format(:phone, ~r/^[\+]?[0-9]*$/, message: "solo debe tener números")
+    |> validate_length(:phone, min: 6, message: "debe tener al menos #{@phone_length_message}")
+    |> validate_length(:phone, max: 18, message: "debe tener máximo #{@phone_length_message}")
+    |> validate_format(:phone, ~r/^[\+]?[0-9]*$/, message: "solo debe contener números")
   end
 
   defp validate_email(changeset) do

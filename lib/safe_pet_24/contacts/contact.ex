@@ -20,7 +20,7 @@ defmodule SafePet24.Contacts.Contact do
     |> validate_required([:name, :phone, :email, :user_id])
     |> validate_length(:name, min: 4, max: 40)
     |> validate_length(:address, min: 4, max: 80)
-    |> validate_length(:phone, min: 10, max: 13)
+    |> validate_length(:phone, min: 10, max: 14)
     |> validate_format(:phone, ~r/^[\+]?[0-9]*$/, message: "solo debe tener números")
     |> validate_email()
   end

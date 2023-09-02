@@ -43,7 +43,7 @@ defmodule SafePet24.Accounts.User do
     |> validate_password(opts)
     |> validate_required([:name, :phone, :acceptance])
     |> validate_length(:name, min: 4, max: 40)
-    |> validate_length(:phone, min: 10, max: 13)
+    |> validate_length(:phone, min: 10, max: 14)
     |> validate_format(:phone, ~r/^[\+]?[0-9]*$/, message: "solo debe tener números")
   end
 

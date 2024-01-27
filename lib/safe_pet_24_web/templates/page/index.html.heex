@@ -9,7 +9,7 @@
 <div class="flex-auto px-4 lg:px-10 pb-10 bg-gray-100 shadow-lg">
   <%= if @pet.photo_url do %>
     <div class="w-full py-12 flex justify-center">
-      <img load="lazy" src={@pet.photo_url} class="shadow-xl rounded-full w-6/12 lg:w-3/12 h-auto align-middle border" />
+      <img load="lazy" src={"https://drive.google.com/thumbnail?id=#{String.split(@pet.photo_url, "id=") |> List.last()}&sz=s4000"} class="shadow-xl rounded-full w-6/12 lg:w-3/12 h-auto align-middle border" />
     </div>
     <hr class="border-b-1 mb-6 border-gray-300" />
   <% end %>
